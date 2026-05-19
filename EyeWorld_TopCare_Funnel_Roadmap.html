@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eye World & Top Care · Full Funnel & Marketing Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg: #0D0F14;
+  --surface: #141720;
+  --surface2: #1C2030;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #F0EDE8;
+  --text2: #8A8F9E;
+  --text3: #555A6B;
+
+  --eye: #00C4A0;
+  --eye-dim: rgba(0,196,160,0.12);
+  --eye-glow: rgba(0,196,160,0.25);
+
+  --top: #FF7A45;
+  --top-dim: rgba(255,122,69,0.12);
+  --top-glow: rgba(255,122,69,0.25);
+
+  --logic: #7C6FFF;
+  --logic-dim: rgba(124,111,255,0.12);
+
+  --gold: #F5C842;
+  --red: #FF4D4D;
+  --green: #00C4A0;
+}
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* NAV */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,15,20,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 32px;
+  overflow-x: auto;
+}
+.nav::-webkit-scrollbar{display:none}
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  color: var(--text);
+  padding: 14px 20px 14px 0;
+  border-right: 1px solid var(--border);
+  margin-right: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-tab {
+  padding: 14px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text3);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.nav-tab:hover { color: var(--text2); }
+.nav-tab.active { color: var(--text); border-bottom-color: var(--text); }
+.nav-tab.eye.active { color: var(--eye); border-bottom-color: var(--eye); }
+.nav-tab.top.active { color: var(--top); border-bottom-color: var(--top); }
+.nav-tab.logic.active { color: var(--logic); border-bottom-color: var(--logic); }
+
+/* HERO */
+.hero {
+  padding: 64px 48px 48px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,196,160,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; right: -60px;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,122,69,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.hero-title span.eye { color: var(--eye); }
+.hero-title span.top { color: var(--top); }
+.hero-sub {
+  font-size: 15px;
+  color: var(--text2);
+  max-width: 600px;
+  line-height: 1.7;
+}
+.account-badges {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.account-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid;
+}
+.account-badge.eye { border-color: var(--eye); color: var(--eye); background: var(--eye-dim); }
+.account-badge.top { border-color: var(--top); color: var(--top); background: var(--top-dim); }
+
+/* SECTIONS */
+.section { display: none; padding: 48px; }
+.section.active { display: block; }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+.section-sub { font-size: 14px; color: var(--text2); margin-bottom: 36px; }
+
+/* FUNNEL STAGES */
+.funnel-wrap { display: grid; gap: 2px; margin-bottom: 48px; }
+.funnel-stage {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.funnel-stage:first-child { border-radius: 10px 10px 0 0; }
+.funnel-stage:last-child { border-radius: 0 0 10px 10px; }
+.funnel-stage:hover { border-color: var(--border2); }
+
+.stage-label {
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+}
+.stage-name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.stage-arabic {
+  font-size: 15px;
+  font-weight: 600;
+}
+.stage-col {
+  padding: 20px 20px;
+  border-right: 1px solid var(--border);
+}
+.stage-col:last-child { border-right: none; }
+.stage-col-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+.stage-items { list-style: none; }
+.stage-items li {
+  font-size: 13px;
+  color: var(--text2);
+  padding: 3px 0;
+  padding-left: 12px;
+  position: relative;
+  line-height: 1.5;
+}
+.stage-items li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--text3);
+}
+.stage-items li strong { color: var(--text); font-weight: 500; }
+
+/* KPI STRIP */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 36px;
+}
+.kpi-cell {
+  background: var(--surface);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.kpi-label { font-size: 11px; color: var(--text3); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+.kpi-value { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 500; }
+.kpi-note { font-size: 11px; color: var(--text3); }
+
+/* ROADMAP */
+.roadmap-week {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.roadmap-week-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s;
+}
+.roadmap-week-header:hover { background: var(--surface2); }
+.roadmap-week-header.open { border-bottom-color: var(--border); }
+.week-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.week-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.week-focus { font-size: 13px; color: var(--text2); }
+.chevron { color: var(--text3); transition: transform 0.2s; }
+.chevron.open { transform: rotate(180deg); }
+
+.week-body { display: none; }
+.week-body.open { display: block; }
+
+.day-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.day-row:last-child { border-bottom: none; }
+.day-name-cell {
+  padding: 16px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4px;
+}
+.day-name-text { font-size: 13px; font-weight: 700; }
+.day-type { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: var(--text3); }
+.day-tasks { padding: 16px; }
+
+.task-group { margin-bottom: 12px; }
+.task-group:last-child { margin-bottom: 0; }
+.task-time-label {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text3);
+  font-weight: 500;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.task-item {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text2);
+  padding: 3px 0;
+  line-height: 1.5;
+  align-items: flex-start;
+}
+.task-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.task-item strong { color: var(--text); font-weight: 500; }
+.atag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.03em;
+}
+.atag.eye { background: var(--eye-dim); color: var(--eye); }
+.atag.top { background: var(--top-dim); color: var(--top); }
+
+/* LOGIC RULES */
+.rules-section { margin-bottom: 48px; }
+.rules-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+.rules-sub { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
+.rule-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.rule-card:hover { border-color: var(--border2); }
+.rule-trigger {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.rule-trigger-icon {
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.rule-trigger-icon.when { background: var(--logic-dim); color: var(--logic); }
+.rule-trigger-icon.always { background: rgba(245,200,66,0.12); color: var(--gold); }
+.rule-trigger-icon.never { background: rgba(255,77,77,0.12); color: var(--red); }
+.rule-trigger-text { font-size: 13px; color: var(--text); font-weight: 500; line-height: 1.5; }
+.rule-actions { padding: 14px 18px; }
+.rule-action {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13px;
+  color: var(--text2);
+  padding: 4px 0;
+  line-height: 1.5;
+}
+.rule-action::before {
+  content: '→';
+  color: var(--text3);
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+.rule-action strong { color: var(--text); font-weight: 500; }
+.rule-action .highlight { color: var(--eye); font-weight: 500; }
+.rule-action .highlight.top { color: var(--top); }
+.rule-action .highlight.warn { color: var(--gold); }
+.rule-action .highlight.danger { color: var(--red); }
+
+/* CONTENT CALENDAR */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.cal-header {
+  background: var(--surface2);
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+.cal-cell {
+  background: var(--surface);
+  padding: 10px 8px;
+  min-height: 90px;
+  font-size: 11px;
+}
+.cal-cell-label {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text3);
+  margin-bottom: 6px;
+}
+.cal-item {
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  line-height: 1.4;
+}
+.cal-item.story { background: rgba(124,111,255,0.15); color: #A99FFF; }
+.cal-item.post { background: rgba(0,196,160,0.12); color: var(--eye); }
+.cal-item.live { background: rgba(255,77,77,0.12); color: #FF8080; }
+.cal-item.ad { background: rgba(255,122,69,0.12); color: var(--top); }
+.cal-item.reel { background: rgba(245,200,66,0.12); color: var(--gold); }
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 40px 0;
+}
+.divider-label {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text3);
+  text-align: center;
+  margin: -18px auto 0;
+  background: var(--bg);
+  display: table;
+  padding: 0 16px;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .hero{padding:36px 20px 32px}
+  .section{padding:32px 20px}
+  .funnel-stage{grid-template-columns:1fr}
+  .stage-col{border-right:none;border-bottom:1px solid var(--border)}
+  .day-row{grid-template-columns:1fr}
+  .day-name-cell{border-right:none;border-bottom:1px solid var(--border)}
+  .cal-grid{grid-template-columns:repeat(4,1fr)}
+  .nav{padding:0 16px}
+  .hero-title{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Eye World · Top Care</div>
+  <button class="nav-tab active" onclick="showTab('overview')">Overview</button>
+  <button class="nav-tab eye" onclick="showTab('eye')">👁 Eye World Funnel</button>
+  <button class="nav-tab top" onclick="showTab('top')">🏥 Top Care Funnel</button>
+  <button class="nav-tab eye" onclick="showTab('eye-road')">Eye World Roadmap</button>
+  <button class="nav-tab top" onclick="showTab('top-road')">Top Care Roadmap</button>
+  <button class="nav-tab logic" onclick="showTab('logic')">⚡ Decision Logic Rules</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">// Marketing Intelligence System · 2026</div>
+  <h1 class="hero-title">Full Funnel &<br><span class="eye">Eye World</span> · <span class="top">Top Care</span><br>Marketing Roadmap</h1>
+  <p class="hero-sub">Complete patient acquisition funnels, daily content cadence, ad logic rules, and decision triggers — built specifically for your team and accounts.</p>
+  <div class="account-badges">
+    <div class="account-badge eye">👁 Eye World · LASIK · Cataract · General Ophthalmology</div>
+    <div class="account-badge top">🏥 Top Care · LASIR · Dental · Aesthetic & Skin</div>
+  </div>
+  <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace;">// Platform: Facebook Page only · WhatsApp conversion · Egyptian work week Sun–Thu</div>
+</div>
+
+<!-- ==================== OVERVIEW ==================== -->
+<div id="tab-overview" class="section active">
+  <div class="section-title">How to Use This Document</div>
+  <div class="section-sub">Navigate using the tabs above. Each tab is a complete standalone module.</div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:36px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;">
+      <div style="font-size:24px;margin-bottom:12px;">👁</div>
+      <div style="font-size:13px;font-weight:700;color:var(--eye);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Eye World Funnel</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6;">Three service funnels: <strong style="color:var(--text)">LASIK</strong> (high-intent, 7–14 day decision), <strong style="color:var(--text)">Cataract</strong> (older audience, family-influenced, longer cycle), and <strong style="color:var(--text)">General Ophthalmology</strong> (checkups, awareness-led). Each has its own TOFU→BOFU logic.</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;">
+      <div style="font-size:24px;margin-bottom:12px;">🏥</div>
+      <div style="font-size:13px;font-weight:700;color:var(--top);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Top Care Funnel</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6;">Three service funnels: <strong style="color:var(--text)">LASIR</strong> (fast 3–7 day decision, impulse-driven), <strong style="color:var(--text)">Dental</strong> (fear-heavy, 14–30 day cycle), and <strong style="color:var(--text)">Aesthetic & Skin</strong> (seasonal, aspiration-driven). Each runs on a different content rhythm.</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;">
+      <div style="font-size:24px;margin-bottom:12px;">📘</div>
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Facebook Only</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6;">All organic content — posts, stories, lives — runs on <strong style="color:var(--text)">Facebook Page only</strong>. No Instagram, no TikTok. Every content rule, timing, and format in this document is calibrated for Facebook's algorithm and Egyptian Facebook audience behavior.</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;">
+      <div style="font-size:24px;margin-bottom:12px;">⚡</div>
+      <div style="font-size:13px;font-weight:700;color:var(--logic);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Decision Logic Rules</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6;">"When X happens → do Y" rules covering: ad performance triggers, organic content reactions to paid performance, frequency management, content fatigue, and budget decisions.</div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:20px 24px;">
+    <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--text3);margin-bottom:8px;">// CORE PHILOSOPHY</div>
+    <div style="font-size:14px;color:var(--text);line-height:1.8;">
+      Paid ads get people to raise their hand. Organic content builds the trust that makes them pick up the phone. Lives and stories close the psychological gap between "I'm interested" and "I'm booking." Every action in this document exists to move the patient one step closer to a confirmed appointment.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== EYE WORLD FUNNEL ==================== -->
+<div id="tab-eye" class="section">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+    <div style="width:10px;height:10px;border-radius:50%;background:var(--eye);"></div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--eye);">Eye World Hospital</div>
+  </div>
+  <div class="section-title">Full Patient Acquisition Funnel</div>
+  <div class="section-sub">Three parallel funnels: LASIK (your main campaign — fast decision), Cataract (slower, family-influenced), and General Ophthalmology (awareness + checkup). All convert via WhatsApp on Facebook only.</div>
+
+  <div class="kpi-strip">
+    <div class="kpi-cell"><div class="kpi-label">LASIK CPL Now</div><div class="kpi-value" style="color:var(--eye)">11.23</div><div class="kpi-note">EGP · kill-switch 20</div></div>
+    <div class="kpi-cell"><div class="kpi-label">Cataract CPL Target</div><div class="kpi-value">30 EGP</div><div class="kpi-note">kill-switch at 60</div></div>
+    <div class="kpi-cell"><div class="kpi-label">General Checkup CPL</div><div class="kpi-value">8 EGP</div><div class="kpi-note">kill-switch at 15</div></div>
+    <div class="kpi-cell"><div class="kpi-label">Platform</div><div class="kpi-value" style="font-size:14px">Facebook</div><div class="kpi-note">WhatsApp conversion</div></div>
+    <div class="kpi-cell"><div class="kpi-label">Freq. Limit</div><div class="kpi-value">2.5×</div><div class="kpi-note">refresh creative above</div></div>
+  </div>
+
+  <!-- LASIK FUNNEL -->
+  <div style="font-size:13px;font-weight:700;color:var(--eye);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Service A — LASIK (Cairo + Governorates Expansion)</div>
+  <div class="funnel-wrap" style="margin-bottom:32px;">
+    <div class="funnel-stage" style="background:rgba(0,196,160,0.04);border-radius:10px 10px 0 0;">
+      <div class="stage-label"><div class="stage-name">Stage 1</div><div class="stage-arabic" style="color:var(--eye)">TOFU</div><div style="font-size:10px;color:var(--text3);margin-top:4px;">Awareness</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid (Meta Ads)</div>
+        <ul class="stage-items">
+          <li><strong>Objective:</strong> Reach or Video Views</li>
+          <li>Cairo: broad 22–50, interest: glasses, vision, ophthalmology</li>
+          <li>محافظات: city-targeted per governorate separately</li>
+          <li>Creative: short video hook — "تخيل حياتك بدون نظارة"</li>
+          <li>محافظات creatives: city name clearly visible, local dialect feel</li>
+          <li>Budget: 15–20% of monthly on awareness only</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Facebook Organic</div>
+        <ul class="stage-items">
+          <li>3× weekly Facebook posts: LASIK myths, FAQs, eye health tips</li>
+          <li>Facebook video: procedure walkthrough — reassuring, not clinical</li>
+          <li>Daily Facebook story: doctor tip or quick fact</li>
+          <li>KPI: post reach, story views, video plays</li>
+        </ul>
+      </div>
+    </div>
+    <div class="funnel-stage">
+      <div class="stage-label"><div class="stage-name">Stage 2</div><div class="stage-arabic" style="color:var(--eye)">MOFU</div><div style="font-size:10px;color:var(--text3);margin-top:4px;">Consideration</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid (Meta Ads)</div>
+        <ul class="stage-items">
+          <li><strong>Objective:</strong> Messages (WhatsApp)</li>
+          <li>Retarget: video viewers 50%+ + page engagers last 90 days</li>
+          <li>Creative: patient testimonial — story + result + WhatsApp CTA</li>
+          <li>Offer: "كشف مجاني / استشارة بدون التزام"</li>
+          <li>This is your current دنيا العيون 2026 campaign — 11.23 EGP CPL</li>
+          <li>Budget: 60–70% of total here — this is where bookings happen</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Facebook Organic</div>
+        <ul class="stage-items">
+          <li>2× weekly: FAQ post answering real DM questions</li>
+          <li>Facebook Live: doctor answers LASIK questions — schedule when ad engagement is peaking</li>
+          <li>Facebook story poll: "هل بتفكر في الليزك؟" — collects warm signals</li>
+          <li>KPI: story replies, post comments, DM questions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="funnel-stage" style="border-radius:0 0 10px 10px;">
+      <div class="stage-label"><div class="stage-name">Stage 3</div><div class="stage-arabic" style="color:var(--eye)">BOFU</div><div style="font-size:10px;color:var(--text3);margin-top:4px;">Decision</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid (Meta Ads)</div>
+        <ul class="stage-items">
+          <li>Retarget link clickers + WhatsApp initiators who didn't book</li>
+          <li>Urgency creative: "الأماكن محدودة هذا الأسبوع"</li>
+          <li>Social proof: number of operations, years of experience</li>
+          <li>Budget: 15–20% — small high-intent pool, frequency up to 3× is acceptable here</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Facebook Organic</div>
+        <ul class="stage-items">
+          <li>Facebook story: direct booking CTA with WhatsApp link sticker</li>
+          <li>Post: objection handling — "هل الليزك آمن؟ هل مؤلم؟"</li>
+          <li>Pin most recent patient testimonial to top of Facebook page</li>
+          <li>KPI: WhatsApp clicks from page, DM booking confirmations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATARACT FUNNEL -->
+  <div style="font-size:13px;font-weight:700;color:var(--eye);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Service B — Cataract Surgery</div>
+  <div class="funnel-wrap" style="margin-bottom:32px;">
+    <div class="funnel-stage" style="background:rgba(0,196,160,0.04);border-radius:10px 10px 0 0;">
+      <div class="stage-label"><div class="stage-name">TOFU</div><div class="stage-arabic" style="color:var(--eye)">Awareness</div><div style="font-size:10px;color:var(--text3);margin-top:4px;">Audience: 45–65+</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Reach objective — older audience 45–70, Cairo + surrounding</li>
+          <li>Also target: children of elderly patients (35–50) — they often make the decision</li>
+          <li>Creative: reassuring, clear language — NOT medical jargon</li>
+          <li>Hook: "عينك تستاهل — الكتاراكت عنده علاج"</li>
+          <li>Avoid fast-cut video — older Facebook audience prefers static or slow-paced video</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Facebook Organic</div>
+        <ul class="stage-items">
+          <li>Post: "علامات الكتاراكت اللي لازم تعرفها" — symptom awareness</li>
+          <li>Video: doctor explains in simple Egyptian Arabic — short, calm tone</li>
+          <li>Story: "والديك بيشتكوا من ضعف النظر؟ إحنا هنا"</li>
+          <li>Post this content in the evening (6–9pm) — older audience is most active then on Facebook</li>
+        </ul>
+      </div>
+    </div>
+    <div class="funnel-stage" style="border-radius:0 0 10px 10px;">
+      <div class="stage-label"><div class="stage-name">MOFU + BOFU</div><div class="stage-arabic" style="color:var(--eye)">Trust → Book</div><div style="font-size:10px;color:var(--text3);margin-top:4px;">Decision cycle: 14–45 days</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Messages objective: WhatsApp — simple CTA, no form friction for older audience</li>
+          <li>Retarget page engagers and video viewers</li>
+          <li>Social proof critical here: years of experience, number of successful surgeries, doctor credentials</li>
+          <li>Offer: "استشارة مجانية — اتصل أو واتساب"</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Facebook Organic</div>
+        <ul class="stage-items">
+          <li>Post: "قصة نجاح — مريض عاد لحياته الطبيعية" — family-shareable content</li>
+          <li>Facebook Live: doctor answers cataract questions — prime time 7–8pm</li>
+          <li>Family angle: "ساعد والديك يشوفوا أحسن" — targeting the decision-maker child</li>
+          <li>Share posts to relevant Facebook groups (Egyptian health/senior groups)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERAL OPHTHALMOLOGY FUNNEL -->
+  <div style="font-size:13px;font-weight:700;color:var(--eye);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Service C — General Ophthalmology & Checkups</div>
+  <div class="funnel-wrap">
+    <div class="funnel-stage" style="background:rgba(0,196,160,0.04);border-radius:10px 10px 0 0;">
+      <div class="stage-label"><div class="stage-name">TOFU+BOFU</div><div class="stage-arabic" style="color:var(--eye)">Awareness → Visit</div><div style="font-size:10px;color:var(--text3);margin-top:4px;">Short funnel — low friction</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Traffic or Messages objective — broad Cairo audience, all ages</li>
+          <li>Seasonal hook: "فحص دوري للعيون — ضروري كل سنة"</li>
+          <li>Offer-led: discounted checkup price or free basic test</li>
+          <li>Fast decision — low commitment barrier, short funnel</li>
+          <li>Run this as a separate campaign from LASIK — don't mix audiences</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Facebook Organic</div>
+        <ul class="stage-items">
+          <li>Post: "متى آخر مرة فحصت عينيك؟" — engagement hook, builds awareness</li>
+          <li>Eye health awareness content — ties to seasonal moments (back to school, Ramadan)</li>
+          <li>Story: "احجز كشف سريع — متاح هذا الأسبوع"</li>
+          <li>Use this service to build Facebook page following — widest appeal of all 3 services</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TOP CARE FUNNEL ==================== -->
+<div id="tab-top" class="section">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+    <div style="width:10px;height:10px;border-radius:50%;background:var(--top);"></div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--top);">Top Care Clinics</div>
+  </div>
+  <div class="section-title">Full Patient Acquisition Funnel</div>
+  <div class="section-sub">Three distinct patient journeys on Facebook only: LASIR (fast impulse decision), Dental (fear-heavy, longer cycle), and Aesthetic & Skin (seasonal, aspiration-driven). Each requires a completely different content tone and ad strategy.</div>
+
+  <div class="kpi-strip">
+    <div class="kpi-cell"><div class="kpi-label">LASIR CPL</div><div class="kpi-value" style="color:var(--top)">1.12</div><div class="kpi-note">EGP — scale now</div></div>
+    <div class="kpi-cell"><div class="kpi-label">Dental CPL Target</div><div class="kpi-value">20 EGP</div><div class="kpi-note">kill-switch at 40</div></div>
+    <div class="kpi-cell"><div class="kpi-label">Aesthetic CPL Target</div><div class="kpi-value">25 EGP</div><div class="kpi-note">kill-switch at 50</div></div>
+    <div class="kpi-cell"><div class="kpi-label">Platform</div><div class="kpi-value" style="font-size:14px">Facebook</div><div class="kpi-note">WhatsApp conversion</div></div>
+    <div class="kpi-cell"><div class="kpi-label">LASIR Decision</div><div class="kpi-value" style="font-size:14px">3–7 days</div><div class="kpi-note">impulse + price-driven</div></div>
+  </div>
+
+  <!-- LASIR -->
+  <div style="font-size:13px;font-weight:700;color:var(--top);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Service A — LASIR (Laser Hair Removal)</div>
+  <div class="funnel-wrap" style="margin-bottom:32px;">
+    <div class="funnel-stage" style="background:rgba(255,122,69,0.04);border-radius:10px 10px 0 0;">
+      <div class="stage-label">
+        <div class="stage-name">TOFU</div>
+        <div class="stage-arabic" style="color:var(--top)">Awareness</div>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Reach/Traffic objective — women 20–45, Cairo + Giza</li>
+          <li>Video creative: before/after transformation — fast-cut Reel style</li>
+          <li>Hook: "قضيت كل عمرك بتحلقي؟" — pain point first</li>
+          <li>This is your current Lasir campaign — already exceptional at 1.12 EGP</li>
+          <li><strong>Scale budget 40% now</strong> — algorithm is fully optimized</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Organic</div>
+        <ul class="stage-items">
+          <li>2× weekly: myth-busting content "الليزر مش بيوجع / آمن على كل الأنواع"</li>
+          <li>Stories: countdowns to seasonal offers (summer, Ramadan, Eid)</li>
+          <li>Reel: session walkthrough — what actually happens during a session</li>
+        </ul>
+      </div>
+    </div>
+    <div class="funnel-stage" style="border-radius:0 0 10px 10px;">
+      <div class="stage-label">
+        <div class="stage-name">BOFU</div>
+        <div class="stage-arabic" style="color:var(--top)">Booking</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:4px;">LASIR has no long MOFU — decision is fast</div>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Messages campaign: retarget ad engagers within 7 days</li>
+          <li>Offer: first session discount or free consultation — urgency is key</li>
+          <li>WhatsApp CTA: instant booking, no form friction</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Organic</div>
+        <ul class="stage-items">
+          <li>Story: "احجزي دلوقتي — الأماكن محدودة هذا الأسبوع"</li>
+          <li>Post: transparent pricing or package comparison</li>
+          <li>Highlight real WhatsApp booking conversations (anonymized)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DENTAL -->
+  <div style="font-size:13px;font-weight:700;color:var(--top);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Service B — Dental (Whitening, Implants, Braces)</div>
+  <div class="funnel-wrap" style="margin-bottom:32px;">
+    <div class="funnel-stage" style="background:rgba(255,122,69,0.04);border-radius:10px 10px 0 0;">
+      <div class="stage-label"><div class="stage-name">TOFU</div><div class="stage-arabic" style="color:var(--top)">Awareness</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Video views objective — broad audience, emotional hook</li>
+          <li>Creative angle: confidence/smile outcome — <strong>NOT fear-based</strong></li>
+          <li>Avoid: showing drills, pain, clinical settings in TOFU</li>
+          <li>Current Teeth ads are struggling — creative needs complete rethink</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Organic</div>
+        <ul class="stage-items">
+          <li>Educational posts: "الفرق بين التبييض وال Veneers"</li>
+          <li>Before/after with patient story — not just images, tell the story</li>
+          <li>Stories: team behind the scenes, clinic tour</li>
+        </ul>
+      </div>
+    </div>
+    <div class="funnel-stage">
+      <div class="stage-label"><div class="stage-name">MOFU</div><div class="stage-arabic" style="color:var(--top)">Trust</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Retarget video viewers 25%+ — Messages objective</li>
+          <li>Social proof creative: number of cases, years of experience, certificates</li>
+          <li>Offer: "كشف مجاني هذا الأسبوع" — reduce the commitment barrier</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Organic</div>
+        <ul class="stage-items">
+          <li>Live: doctor answers common dental fears — fear of pain, cost, time</li>
+          <li>FAQ posts based on DM questions this week</li>
+          <li>Story Q&A sticker: "اسألنا أي حاجة عن أسنانك"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="funnel-stage" style="border-radius:0 0 10px 10px;">
+      <div class="stage-label"><div class="stage-name">BOFU</div><div class="stage-arabic" style="color:var(--top)">Booking</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Retarget link clickers + message initiators who didn't book</li>
+          <li>Urgency: limited appointment slots this week</li>
+          <li>Specific treatment CTA — not generic "contact us"</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Organic</div>
+        <ul class="stage-items">
+          <li>Pin patient review to profile top</li>
+          <li>Story: WhatsApp booking link with specific CTA</li>
+          <li>Post: what to expect on your first visit — removes anxiety</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- AESTHETIC & SKIN -->
+  <div style="font-size:13px;font-weight:700;color:var(--top);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Service C — Aesthetic & Skin Treatments</div>
+  <div class="funnel-wrap">
+    <div class="funnel-stage" style="background:rgba(255,122,69,0.04);border-radius:10px 10px 0 0;">
+      <div class="stage-label"><div class="stage-name">TOFU</div><div class="stage-arabic" style="color:var(--top)">Aspiration</div><div style="font-size:10px;color:var(--text3);margin-top:4px;">Women 22–45, Cairo</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Video Views or Reach objective — women 22–45, Cairo + Giza</li>
+          <li>Aspiration-led creative: outcome-first, confident, glowing result</li>
+          <li>Seasonal is critical: summer (skin prep), Eid (glow-up), Ramadan (pre-Eid prep), winter (skin recovery)</li>
+          <li>Hook: "بشرتك تستاهل أكتر" — aspiration, not problem-shaming</li>
+          <li>Avoid: before/after that looks medical or clinical in TOFU</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Facebook Organic</div>
+        <ul class="stage-items">
+          <li>Educational posts: "الفرق بين الليزر وال Peeling — ايه المناسب ليكي؟"</li>
+          <li>Seasonal content: tie every post to an upcoming seasonal moment</li>
+          <li>Facebook video: doctor or specialist explains treatment benefits, warm tone</li>
+          <li>Story: "نصيحة العناية ببشرتك هذا الأسبوع"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="funnel-stage">
+      <div class="stage-label"><div class="stage-name">MOFU</div><div class="stage-arabic" style="color:var(--top)">Trust</div><div style="font-size:10px;color:var(--text3);margin-top:4px;">Decision cycle: 7–21 days</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Messages objective — retarget video viewers + page engagers (60 days)</li>
+          <li>Testimonial creative: real patient result + her words in Arabic</li>
+          <li>Offer: "استشارة مجانية لمعرفة المناسب لبشرتك"</li>
+          <li>This stage is critical for aesthetic — patients need to feel understood, not sold to</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Facebook Organic</div>
+        <ul class="stage-items">
+          <li>Facebook Live: specialist answers skin questions — Q&A format, warm conversational tone</li>
+          <li>Story poll: "عندك مشكلة في البشرة؟ قولنا" — collects warm signals + DMs</li>
+          <li>Post: patient journey story — "من مشكلة البشرة للثقة بالنفس"</li>
+          <li>KPI: story replies, DMs, Live viewers</li>
+        </ul>
+      </div>
+    </div>
+    <div class="funnel-stage" style="border-radius:0 0 10px 10px;">
+      <div class="stage-label"><div class="stage-name">BOFU</div><div class="stage-arabic" style="color:var(--top)">Booking</div></div>
+      <div class="stage-col">
+        <div class="stage-col-title">Paid</div>
+        <ul class="stage-items">
+          <li>Retarget WhatsApp initiators + link clickers who didn't book</li>
+          <li>Urgency: seasonal offer ending / limited slots this month</li>
+          <li>Specific treatment CTA: "احجزي جلسة X هذا الأسبوع" — specific beats generic</li>
+        </ul>
+      </div>
+      <div class="stage-col">
+        <div class="stage-col-title">Facebook Organic</div>
+        <ul class="stage-items">
+          <li>Pin best patient review or result to top of Facebook page</li>
+          <li>Story: "الأماكن المتبقية هذا الأسبوع محدودة — واتساب في البايو"</li>
+          <li>Post: "ايه اللي بيحصل في الجلسة الأولى؟" — removes anxiety about first visit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== EYE WORLD ROADMAP ==================== -->
+<div id="tab-eye-road" class="section">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+    <div style="width:10px;height:10px;border-radius:50%;background:var(--eye);"></div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--eye);">Eye World Hospital</div>
+  </div>
+  <div class="section-title">Weekly Content & Action Roadmap</div>
+  <div class="section-sub">Daily content cadence tied to live ad performance. Egyptian work week: Sunday–Thursday. Friday–Saturday = high organic engagement, low ad spend efficiency.</div>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><div style="width:10px;height:10px;border-radius:2px;background:rgba(124,111,255,0.4);"></div>Facebook Story</div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><div style="width:10px;height:10px;border-radius:2px;background:rgba(0,196,160,0.3);"></div>Facebook Post</div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><div style="width:10px;height:10px;border-radius:2px;background:rgba(255,77,77,0.3);"></div>Facebook Live</div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><div style="width:10px;height:10px;border-radius:2px;background:rgba(245,200,66,0.3);"></div>Facebook Video Post</div>
+  </div>
+
+  <div class="cal-grid">
+    <div class="cal-header">Sunday</div>
+    <div class="cal-header">Monday</div>
+    <div class="cal-header">Tuesday</div>
+    <div class="cal-header">Wednesday</div>
+    <div class="cal-header">Thursday</div>
+    <div class="cal-header">Friday</div>
+    <div class="cal-header">Saturday</div>
+
+    <div class="cal-cell">
+      <div class="cal-cell-label">Week start</div>
+      <div class="cal-item story">Story: "صباح الأمل — نهارك بعيون واضحة"</div>
+      <div class="cal-item post">Post: LASIK myth-busting</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Content push</div>
+      <div class="cal-item story">Story: patient tip or fact</div>
+      <div class="cal-item reel">FB Video: before/after or doctor moment</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Engagement day</div>
+      <div class="cal-item story">Story: Q&A sticker "اسألنا عن الليزك"</div>
+      <div class="cal-item post">Post: answer top DM questions</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Live day</div>
+      <div class="cal-item story">Story: "لايف الليلة — دكتورنا بيجاوب"</div>
+      <div class="cal-item live">LIVE: Doctor Q&A 8–9pm</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">CTA push</div>
+      <div class="cal-item story">Story: booking CTA + WhatsApp link</div>
+      <div class="cal-item post">Post: social proof / patient story</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Weekend — peak reach</div>
+      <div class="cal-item story">Story: weekend offer or reminder</div>
+      <div class="cal-item reel">FB Video: emotional / inspirational</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Rest day</div>
+      <div class="cal-item story">Story: behind the scenes or team</div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-label">// WEEKLY ROADMAP DETAIL</div></div>
+
+  <div class="roadmap-week">
+    <div class="roadmap-week-header" onclick="toggleWeek(this)">
+      <div class="week-title">
+        <span class="week-tag" style="background:var(--eye-dim);color:var(--eye)">WEEK A</span>
+        Acquisition Week — Push LASIK Cairo Hard
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="week-focus">When: LASIK CPL is under 15 EGP and frequency is under 2.0</div>
+        <div class="chevron">▼</div>
+      </div>
+    </div>
+    <div class="week-body">
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Sunday</div><div class="day-type">AUDIT + PLAN</div></div>
+        <div class="day-tasks">
+          <div class="task-group">
+            <div class="task-time-label">9:00–10:00 — Hadeer</div>
+            <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div><span class="atag eye">EW</span> Sync Meta data in dashboard app. Confirm LASIK CPL and frequency. If CPL &lt; 15 EGP → proceed with scale plan.</div>
+          </div>
+          <div class="task-group">
+            <div class="task-time-label">10:00–12:00 — Asmaa</div>
+            <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div><span class="atag eye">EW</span> Post: educational LASIK myth ("الليزك بيوجع؟ الحقيقة...") — drives organic reach to warm retargeting pool.</div>
+            <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Story: "صباح الجمال — نهارك بعيون واضحة" with poll sticker.</div>
+          </div>
+          <div class="task-group">
+            <div class="task-time-label">Afternoon — Hadeer</div>
+            <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>If محافظات campaigns passed 7 days AND CPL &lt; 25 EGP → hold. If CPL &gt; 35 EGP → pause and flag to supervisor.</div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Monday</div><div class="day-type">CONTENT PROD</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div><span class="atag eye">EW</span> Bakr: deliver city-specific محافظات creatives. Asmaa: write accompanying local-dialect copy for each city.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Hadeer: launch new محافظات creatives inside existing ad sets (duplicate first).</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Organic: Facebook video — LASIK procedure walkthrough ("في 10 دقائق بس...") — posted at 7–8pm for maximum Facebook reach.</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Tuesday</div><div class="day-type">ENGAGE</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Story Q&A sticker: "عندك سؤال عن الليزك؟ اسألنا" — collect questions for Wednesday live.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Post: answer top 3 DM questions from last week as a carousel post.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Hadeer: check new محافظات creative performance vs old — if new has better CTR in 48hrs, pause old version.</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Wednesday</div><div class="day-type">LIVE DAY</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Story in morning: "الليلة لايف مع دكتورنا — هيجاوب على كل أسئلتكم عن الليزك" — minimum 3 story reminders.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Live: 8pm–9pm. Doctor answers the Q&A sticker questions collected Tuesday. End with clear CTA: WhatsApp number.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div><strong>Rule:</strong> When live is scheduled → <strong>increase ad budget 20% on that day</strong> — live drives organic traffic which lowers ad CPM.</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Thursday</div><div class="day-type">CTA + REPORT</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Story: booking CTA — "الأسبوع الجاي فيه أماكن محدودة — احجز دلوقتي" + WhatsApp button.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Post: patient success story (this week's best testimonial or before/after).</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Hadeer: export Meta report, upload to dashboard, generate PDF for supervisor.</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Friday</div><div class="day-type">ORGANIC PEAK</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>No new ad launches on Friday — organic reach is high, ad CPM is also higher. Let organic carry the day.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Facebook video post: inspirational/emotional — not hard sell. "تخيل صحيت الصبح وشفت بعيون واضحة..." — Facebook video gets highest organic reach on weekends.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Story: simple feel-good content — team photo, behind the scenes, patient moment.</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Saturday</div><div class="day-type">REST / MONITOR</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>1 story only — no feed posts. Let the week's content breathe.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--eye)"></div>Hadeer: check automated rules — any kill-switch triggered? Any ad overspending? Fix remotely if needed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TOP CARE ROADMAP ==================== -->
+<div id="tab-top-road" class="section">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+    <div style="width:10px;height:10px;border-radius:50%;background:var(--top);"></div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--top);">Top Care Clinics</div>
+  </div>
+  <div class="section-title">Weekly Content & Action Roadmap</div>
+  <div class="section-sub">Three services running simultaneously — LASIR, Dental, Insurance. Content must not confuse the audience. Each service gets dedicated content days.</div>
+
+  <div class="cal-grid">
+    <div class="cal-header">Sunday</div>
+    <div class="cal-header">Monday</div>
+    <div class="cal-header">Tuesday</div>
+    <div class="cal-header">Wednesday</div>
+    <div class="cal-header">Thursday</div>
+    <div class="cal-header">Friday</div>
+    <div class="cal-header">Saturday</div>
+
+    <div class="cal-cell">
+      <div class="cal-cell-label">LASIR Day</div>
+      <div class="cal-item story">Story: LASIR tip or myth</div>
+      <div class="cal-item post">Post: LASIR educational</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Dental Day</div>
+      <div class="cal-item story">Story: smile transformation</div>
+      <div class="cal-item reel">FB Video: dental before/after</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Aesthetic Day</div>
+      <div class="cal-item story">Story: skin glow CTA</div>
+      <div class="cal-item post">Post: aesthetic treatment benefits</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Live Day</div>
+      <div class="cal-item story">Story: live announcement</div>
+      <div class="cal-item live">LIVE: service Q&A 8pm</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Booking Push</div>
+      <div class="cal-item story">Story: "احجز الأسبوع ده"</div>
+      <div class="cal-item post">Post: patient testimonial</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">High reach</div>
+      <div class="cal-item reel">FB Video: best content of week</div>
+      <div class="cal-item story">Story: offer reminder</div>
+    </div>
+    <div class="cal-cell">
+      <div class="cal-cell-label">Rest</div>
+      <div class="cal-item story">Story: team / behind scenes</div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-label">// WEEKLY ROADMAP DETAIL</div></div>
+
+  <div class="roadmap-week">
+    <div class="roadmap-week-header" onclick="toggleWeek(this)">
+      <div class="week-title">
+        <span class="week-tag" style="background:var(--top-dim);color:var(--top)">TOP CARE</span>
+        Standard Weekly Rhythm — All Services Running
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="week-focus">Rotating service focus prevents audience confusion</div>
+        <div class="chevron">▼</div>
+      </div>
+    </div>
+    <div class="week-body">
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Sunday</div><div class="day-type">LASIR FOCUS</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div><span class="atag top">TC</span> Hadeer: sync Top Care account. Check Lasir CPL — if still under 5 EGP → confirm scaled budget is running. Check Lasir reach for the week.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Asmaa: post LASIR myth-busting content. Story: "حقيقة الليزر بالأرقام..."</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Check Insurance campaigns (3 cities) — if any city frequency crosses 2.0 → prepare creative refresh for next week.</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Monday</div><div class="day-type">DENTAL FOCUS</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Bakr: deliver new Teeth creative (replacement for paused mssg2). Focus: confidence angle, warm colors, no clinical imagery.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Hadeer: launch new Teeth creative in a duplicate ad set — DO NOT reactivate the paused one. Fresh start.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Asmaa: Facebook video post — dental transformation story. 30–60 second video, result-first storytelling. Post at 7pm for peak Facebook reach.</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Tuesday</div><div class="day-type">AESTHETIC FOCUS</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Asmaa: post "ايه الفرق بين جلسات الليزر والـ Peeling؟" — educational tone, drives organic reach to aesthetic audience.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Story: poll or question sticker — "عندك مشكلة في البشرة؟ قولنا" — collect DMs and warm signals for retargeting.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Hadeer: check new Dental creative — if CTR is higher than old one after 48hrs, pause mssg1 original and run new version only.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Flag any upcoming seasonal moment (Eid, summer, Ramadan) within 3 weeks → begin seasonal aesthetic campaign brief this week.</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Wednesday</div><div class="day-type">LIVE DAY</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Live: rotate service each week. Week 1 = LASIR Q&A. Week 2 = Dental fears Q&A. Week 3 = Aesthetic & Skin Q&A ("اسألي متخصصتنا عن بشرتك"). 8–9pm Facebook Live.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Story: 3 reminders throughout the day — 9am, 2pm, 7pm — for live announcement.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Hadeer: boost the live post as a Boost (not a full ad) — LE 50–100 for local audience reach boost during live.</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-name-cell"><div class="day-name-text">Thursday</div><div class="day-type">CTA + REPORT</div></div>
+        <div class="day-tasks">
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Post: best patient testimonial or result of the week — one service per post, not mixed.</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Story: urgency CTA "الأماكن المتبقية هذا الأسبوع محدودة — واتساب في البايو".</div>
+          <div class="task-item"><div class="task-dot" style="background:var(--top)"></div>Hadeer: generate weekly PDF report from dashboard. Export Meta data and upload for AI planner next week.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LOGIC RULES ==================== -->
+<div id="tab-logic" class="section">
+  <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--logic);margin-bottom:4px;">Decision Engine</div>
+  <div class="section-title">Logic Rules & Decision Triggers</div>
+  <div class="section-sub">Every rule below is a decision you should NEVER have to think about from scratch. When you see the trigger — the action is automatic.</div>
+
+  <!-- AD PERFORMANCE RULES -->
+  <div class="rules-section">
+    <div class="rules-title">📊 Ad Performance Rules</div>
+    <div class="rules-sub">Triggers based on Meta Ads Manager data — check every morning.</div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">Any ad set's CPL crosses its kill-switch threshold for 2 consecutive days</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Pause the ad set immediately.</strong> Do not reduce budget — pausing is cleaner than budget cuts during bad performance.</div>
+        <div class="rule-action">Notify supervisor same day with: ad set name, current CPL, kill-switch threshold, days over threshold.</div>
+        <div class="rule-action"><span class="highlight">Do not reactivate</span> until new creative AND new copy are both ready. Reactivating the same creative will reproduce the same result.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">Frequency on any ad set crosses 2.5×</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Do not pause the ad set yet.</strong> Flag it for creative refresh within 5 days.</div>
+        <div class="rule-action">Brief Bakr + Asmaa that same day for 2 new creative variations — completely different visual approach.</div>
+        <div class="rule-action">If frequency hits <span class="highlight warn">3.0×</span> before new creative is ready → pause the ad set. Do not keep spending on a fatigued audience.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">An ad set's CPL drops below 70% of its target CPL (exceptional performance)</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Scale budget by 30–50% in a single step.</strong> The algorithm is optimized — gradual scaling at this point is slower with no benefit.</div>
+        <div class="rule-action">Monitor for 48 hours after scale. If CPL stays stable or improves → scale again by 20%.</div>
+        <div class="rule-action"><span class="highlight danger">Never</span> change the creative, audience, or targeting when a campaign is performing exceptionally. Only touch the budget.</div>
+        <div class="rule-action">Current example: <span class="highlight">Lasir at 1.12 EGP</span> — scale now, touch nothing else.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">A new ad set has under 50 results and has been running less than 7 days</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Do not optimize, pause, or change anything.</strong> The algorithm is in learning phase — any edit resets the learning.</div>
+        <div class="rule-action">Exception: if CPL is already <span class="highlight danger">more than 3× the kill-switch</span> with 20+ results → pause. The signal is already strong enough to act.</div>
+        <div class="rule-action">Current example: محافظات campaigns (Giza, Fayom, Benha) — wait for 50 results each before any judgment.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">A/B test (two creatives in same ad set) has been running 3+ days with 20+ results each</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action">Compare CPL of each creative. The one with lower CPL is the winner — even if the margin is small.</div>
+        <div class="rule-action">Pause the losing creative. Do not delete it — archive for reference.</div>
+        <div class="rule-action">Put 100% of budget behind the winning creative. Splitting budget between winner and loser reduces overall efficiency.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">All ads stop unexpectedly (payment error, account flag, policy violation)</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Step 1:</strong> Check Meta billing page first — payment issue is the most common cause. Pay balance or update card.</div>
+        <div class="rule-action"><strong>Step 2:</strong> After payment clears, manually reactivate each paused ad set — they don't always auto-resume.</div>
+        <div class="rule-action"><strong>Step 3:</strong> Check account spending limit — reset if needed after billing fix.</div>
+        <div class="rule-action"><strong>Step 4:</strong> Notify supervisor with how many hours ads were stopped — recalculate the day's expected results vs actual to assess loss.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORGANIC + AD INTERACTION RULES -->
+  <div class="rules-section">
+    <div class="rules-title">📱 Organic Content Rules — Tied to Live Ad Performance</div>
+    <div class="rules-sub">What to post, when, and how it should react to what the paid campaigns are doing.</div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">A paid campaign is actively running and CPL is healthy (under target)</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Post 2–3 organic content pieces this week</strong> that reinforce the same message as the running ad — this warms the retargeting pool organically.</div>
+        <div class="rule-action">Content type: educational, testimonial, or social proof — same service the ad is promoting.</div>
+        <div class="rule-action">Do NOT post a competing service heavily the same week. Focus organic on what paid is pushing.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">A paid campaign's CPL is rising (approaching kill-switch) but you don't have new creative ready yet</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Increase organic content immediately</strong> — post more frequently (daily) on that service to maintain reach while paid performance weakens.</div>
+        <div class="rule-action">Use organic to buy time: more posts, more stories, more engagement = maintains audience warmth without spending on a fatigued ad.</div>
+        <div class="rule-action">Schedule a Live session for that service this week — live content generates the highest organic reach and can partially compensate for dropping ad performance.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon always">ALWAYS</div>
+        <div class="rule-trigger-text">On the day a Live session is scheduled</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action">Post minimum 3 story reminders: 9am, 2pm, 7pm (1 hour before).</div>
+        <div class="rule-action"><strong>Increase ad budget by 20% that day only</strong> — live drives page visits which helps Meta's algorithm deliver ads more efficiently.</div>
+        <div class="rule-action">After live ends: trim the best 2–3 minutes of the live and post it as a <strong>Facebook video post</strong> within 24 hours — give it a clear title and description. This extends the live's reach significantly to people who missed it.</div>
+        <div class="rule-action">Collect all questions asked during live → turn them into the next week's FAQ content.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon always">ALWAYS</div>
+        <div class="rule-trigger-text">On Fridays and Saturdays (Egyptian weekend)</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Do not launch new ad sets on Fridays.</strong> CPM is higher on weekends, learning phase is less efficient, and results are less predictable.</div>
+        <div class="rule-action">Post 1 Facebook video or strong image post on Friday — organic reach peaks on weekend. Let it work for free.</div>
+        <div class="rule-action">Story CTA is allowed — WhatsApp link reminder — but keep it soft, not hard-sell.</div>
+        <div class="rule-action">Saturday: 1 story only. Rest the account and audience. Over-posting on rest days reduces weekly average engagement rate.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">An ad's comment section has patient questions or concerns</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Reply within 4 hours</strong> — unanswered comments on ads reduce social proof and hurt ad performance scores.</div>
+        <div class="rule-action">If the question is medical (dosage, recovery, side effects) → reply "تواصل معنا على الواتساب عشان نقدر نساعدك أكتر" and DO NOT answer the medical question publicly.</div>
+        <div class="rule-action">Positive comments: like and reply warmly. These increase ad social proof which Meta rewards with better delivery.</div>
+        <div class="rule-action">If multiple people ask the same question in comments → that question becomes this week's FAQ post topic.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY LOGIC RULES -->
+  <div class="rules-section">
+    <div class="rules-title">📸 Story Posting Logic</div>
+    <div class="rules-sub">When to post what type of story — based on where you are in the week and what the ads are doing.</div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon always">ALWAYS</div>
+        <div class="rule-trigger-text">Post a minimum of 1 story every day — even on rest days</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action">Accounts that post daily stories maintain higher page health scores and better ad delivery from Meta's algorithm.</div>
+        <div class="rule-action">Minimum story: behind the scenes, team moment, morning greeting, or a quote relevant to your service. 30 seconds or less.</div>
+        <div class="rule-action">Story type by day: Sun = educational, Mon = product/service, Tue = engagement (poll/Q&A sticker), Wed = Live promo (3 reminders: 9am/2pm/7pm), Thu = CTA/booking link, Fri = emotional/inspirational, Sat = team/behind scenes. <strong>Note:</strong> Facebook Stories are separate from feed posts — both can run the same day without competing.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">An ad has been running for 3+ days and results are coming in steadily</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action">Push a story that mirrors the ad message — same offer, same service — to reinforce the message for people who saw the ad but didn't click yet.</div>
+        <div class="rule-action">Include the WhatsApp link as a swipe-up or link sticker in the story — same destination as the ad.</div>
+        <div class="rule-action">This creates a "surround sound" effect — patient sees the ad, then sees the story, conversion rate improves.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon never">NEVER</div>
+        <div class="rule-trigger-text">Post more than 7 stories in a single day</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action">Story fatigue is real — after 5–7 stories, audience drop-off rate increases sharply. You're hurting your own reach.</div>
+        <div class="rule-action">Ideal: 3–5 stories per day. Space them: morning (9–10am), midday (1–2pm), evening (7–9pm).</div>
+        <div class="rule-action">If you have more content to share → save it for the next day or turn it into a feed post instead.</div>
+      </div>
+    </div>
+  </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon always">ALWAYS</div>
+        <div class="rule-trigger-text">Facebook-only content format priorities (no Instagram, no TikTok)</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Best performing Facebook formats in order:</strong> Facebook Live → Native Facebook Video → Photo Post → Carousel → Link Post. Text-only posts perform worst.</div>
+        <div class="rule-action">Facebook videos should be uploaded natively (not shared from YouTube) — native video gets 3× more reach than external links on Facebook's algorithm.</div>
+        <div class="rule-action">Optimal post times for Egyptian Facebook audience: <strong>8–10am</strong> (morning scroll), <strong>1–3pm</strong> (lunch break), <strong>7–10pm</strong> (evening peak). Thursday and Friday evenings are highest reach windows of the week.</div>
+        <div class="rule-action">Facebook Live minimum duration: 20 minutes. Lives under 10 minutes do not get algorithmic boost. The longer the live (up to 60 min), the more Facebook promotes it organically.</div>
+        <div class="rule-action">Facebook story link sticker: always add WhatsApp number as a link sticker in booking-CTA stories — this is the only way to make Facebook stories clickable.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BUDGET RULES -->
+  <div class="rules-section">
+    <div class="rules-title">💰 Budget Decision Rules</div>
+    <div class="rules-sub">When and how to move money between campaigns.</div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon never">NEVER</div>
+        <div class="rule-trigger-text">Make more than one budget change to the same ad set in 24 hours</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action">Each budget change partially resets the learning phase. Multiple changes in one day = full reset = wasted spend while the algorithm re-learns.</div>
+        <div class="rule-action">Make one change, then wait 24–48 hours before touching the budget again.</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon when">WHEN</div>
+        <div class="rule-trigger-text">Monthly budget is 70% spent and it's only the 20th of the month</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action"><strong>Do not add more budget to poor performers.</strong> Shift remaining budget entirely to the best-performing ad sets.</div>
+        <div class="rule-action">Pause all ad sets with CPL above target for the last 3 days — concentrate remaining budget on proven winners only.</div>
+        <div class="rule-action">Flag to supervisor: "We're at 70% budget on day 20 — recommend pausing X, Y, Z to protect end-of-month results."</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-trigger">
+        <div class="rule-trigger-icon always">ALWAYS</div>
+        <div class="rule-trigger-text">Before launching any new campaign or ad set</div>
+      </div>
+      <div class="rule-actions">
+        <div class="rule-action">Use the Target Advisor in the dashboard app first — get AI-suggested CPL target, kill-switch, and reach estimate before setting up in Meta.</div>
+        <div class="rule-action">Set the kill-switch value in the dashboard app BEFORE the campaign goes live — not after it starts overspending.</div>
+        <div class="rule-action">New campaigns need a minimum 7-day learning period and at least 500 EGP budget to generate reliable signal. Under-budgeted campaigns never properly optimize.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function toggleWeek(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  header.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+
+const d = new Date();
+</script>
+</body>
+</html>

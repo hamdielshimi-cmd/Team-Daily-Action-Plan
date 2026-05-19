@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eye World · Team Daily SOPs</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --border: #E8E4DC;
+    --text-primary: #1A1714;
+    --text-secondary: #6B6560;
+    --text-muted: #9E9891;
+    --accent-eye: #1B4F72;
+    --accent-eye-light: #EAF2F8;
+    --accent-top: #1E5E3E;
+    --accent-top-light: #E8F5EE;
+    --accent-ihab: #6B2D7F;
+    --accent-ihab-light: #F4EEF8;
+    --red: #C0392B;
+    --red-light: #FDECEA;
+    --amber: #D35400;
+    --amber-light: #FEF5EC;
+    --green: #1E8449;
+    --green-light: #EAF7EF;
+    --blue: #1A5276;
+    --blue-light: #EAF2FB;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--text-primary);
+    color: white;
+    padding: 40px 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 40px solid rgba(255,255,255,0.04);
+  }
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .header-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    letter-spacing: -0.3px;
+    color: white;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+  .header-date {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    text-align: right;
+  }
+
+  .account-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* TABS */
+  .tabs-wrap {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.15s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .tab:hover { color: var(--text-primary); }
+  .tab.active { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  /* MAIN */
+  .main { padding: 36px 48px; max-width: 1100px; }
+
+  /* ACCOUNT STATUS SECTION */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .account-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .account-card-header {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .account-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .account-name {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .account-card-body { padding: 14px 18px; }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--text-secondary); }
+  .stat-value { font-weight: 500; }
+
+  .alert-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    margin-top: 8px;
+  }
+  .alert-item.red { background: var(--red-light); color: var(--red); }
+  .alert-item.amber { background: var(--amber-light); color: var(--amber); }
+  .alert-item.green { background: var(--green-light); color: var(--green); }
+  .alert-dot { margin-top: 5px; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+  /* ROLE SECTIONS */
+  .role-section { display: none; }
+  .role-section.active { display: block; }
+
+  .role-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .role-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .role-title { font-family: 'DM Serif Display', serif; font-size: 22px; }
+  .role-subtitle { font-size: 13px; color: var(--text-secondary); }
+
+  .day-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .day-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: background 0.1s;
+  }
+  .day-card-header:hover { background: var(--bg); }
+  .day-card-header.open { border-bottom-color: var(--border); }
+  .day-name {
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .day-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .day-focus { font-size: 12px; color: var(--text-secondary); }
+  .day-chevron { color: var(--text-muted); transition: transform 0.2s; font-size: 16px; }
+  .day-chevron.open { transform: rotate(180deg); }
+
+  .day-body { display: none; padding: 16px 18px; }
+  .day-body.open { display: block; }
+
+  .task-block { margin-bottom: 16px; }
+  .task-block:last-child { margin-bottom: 0; }
+  .task-time {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .task-list { list-style: none; }
+  .task-list li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 13px;
+    padding: 4px 0;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .task-list li::before {
+    content: '';
+    margin-top: 7px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    flex-shrink: 0;
+  }
+  .task-list li strong { color: var(--text-primary); font-weight: 500; }
+  .task-list li span.account-tag {
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .kpi-table th {
+    text-align: left;
+    padding: 6px 10px;
+    background: var(--bg);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .kpi-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .kpi-table tr:last-child td { border-bottom: none; }
+
+  /* HIDE scrollbar on tabs */
+  .tabs-wrap::-webkit-scrollbar { display: none; }
+
+  @media (max-width: 680px) {
+    .header { padding: 28px 20px; }
+    .tabs-wrap { padding: 0 20px; }
+    .main { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-brand">Eye World Group · Daily SOPs</div>
+      <div class="header-sub">Standard Operating Procedures — Ads Team</div>
+    </div>
+    <div class="header-date">
+      <div id="live-date"></div>
+      <div style="margin-top:4px; font-size:11px; opacity:0.4">Internal Use Only</div>
+    </div>
+  </div>
+  <div class="account-pills">
+    <div class="pill">👁 Eye World Hospital</div>
+    <div class="pill">🏥 Top Care Clinics</div>
+    <div class="pill">👨‍⚕️ Dr. Ihab</div>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <button class="tab active" onclick="showTab('status')">📊 Account Status</button>
+  <button class="tab" onclick="showTab('content')">✍️ Content Creator — Asmaa</button>
+  <button class="tab" onclick="showTab('buyer')">📈 Media Buyer — Hadeer</button>
+  <button class="tab" onclick="showTab('designer')">🎨 Designer — Bakr</button>
+</div>
+
+<div class="main">
+
+  <!-- ======================== ACCOUNT STATUS ======================== -->
+  <div id="tab-status" class="role-section active">
+    <div class="section-label" style="margin-top:4px;">Latest account situation · fed from performance audit</div>
+
+    <div class="status-grid">
+
+      <!-- DR IHAB -->
+      <div class="account-card">
+        <div class="account-card-header">
+          <div class="account-dot" style="background: var(--accent-ihab);"></div>
+          <div>
+            <div class="account-name">Dr. Ihab</div>
+            <div style="font-size:11px; color:var(--text-muted)">Campaign: dr .ihab 2025 – Copy</div>
+          </div>
+          <div style="margin-left:auto;"><span style="font-size:11px; font-weight:600; background:var(--red-light); color:var(--red); padding:3px 8px; border-radius:20px;">⚠ Action Required</span></div>
+        </div>
+        <div class="account-card-body">
+          <div class="stat-row"><span class="stat-label">Total spend</span><span class="stat-value">14,584 EGP</span></div>
+          <div class="stat-row"><span class="stat-label">Total reach</span><span class="stat-value">326,226</span></div>
+          <div class="stat-row"><span class="stat-label">Total results</span><span class="stat-value">525</span></div>
+          <div class="stat-row"><span class="stat-label">Blended cost/result</span><span class="stat-value">27.8 EGP</span></div>
+          <div class="alert-item red"><div class="alert-dot"></div><div><strong>Libya/Algeria:</strong> Frequency 3.26 — critical audience fatigue. Pause or replace creative immediately.</div></div>
+          <div class="alert-item amber"><div class="alert-dot"></div><div><strong>Saudi Arabia:</strong> Frequency 2.76 — refresh creative this week. Results slowing down.</div></div>
+          <div style="margin-top:10px; font-size:12px; color:var(--text-muted); border-top: 1px solid var(--border); padding-top:10px;">
+            <strong>App update needed:</strong> Set CPL kill-switch at 35 EGP. Flag Libya/Algeria red.
+          </div>
+        </div>
+      </div>
+
+      <!-- EYE WORLD -->
+      <div class="account-card">
+        <div class="account-card-header">
+          <div class="account-dot" style="background: var(--accent-eye);"></div>
+          <div>
+            <div class="account-name">Eye World Hospital</div>
+            <div style="font-size:11px; color:var(--text-muted)">Campaigns: دنيا العيون 2026 · ليزك محافظات</div>
+          </div>
+          <div style="margin-left:auto;"><span style="font-size:11px; font-weight:600; background:var(--amber-light); color:var(--amber); padding:3px 8px; border-radius:20px;">👀 Monitor</span></div>
+        </div>
+        <div class="account-card-body">
+          <div class="stat-row"><span class="stat-label">LAZIK Cairo spend</span><span class="stat-value">4,671 EGP</span></div>
+          <div class="stat-row"><span class="stat-label">LAZIK Cairo CPL</span><span class="stat-value">11.23 EGP ✅</span></div>
+          <div class="stat-row"><span class="stat-label">محافظات total spend</span><span class="stat-value">721 EGP</span></div>
+          <div class="stat-row"><span class="stat-label">محافظات results</span><span class="stat-value">29 (learning phase)</span></div>
+          <div class="alert-item green"><div class="alert-dot"></div><div><strong>LAZIK Cairo</strong> performing well — 11.23 EGP CPL, frequency 1.62. Hold current budget.</div></div>
+          <div class="alert-item red"><div class="alert-dot"></div><div><strong>بنى سويف:</strong> 43.48 EGP/result already. Pause if it passes 50 EGP without improvement.</div></div>
+          <div class="alert-item amber"><div class="alert-dot"></div><div><strong>Giza, Fayom, Benha:</strong> Still in learning phase. Wait 5 more days before judging.</div></div>
+          <div style="margin-top:10px; font-size:12px; color:var(--text-muted); border-top: 1px solid var(--border); padding-top:10px;">
+            <strong>App update needed:</strong> Set LAZIK kill-switch at 20 EGP CPL. محافظات targets: 25 EGP CPL, 50 results/city minimum before optimization.
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP CARE -->
+      <div class="account-card">
+        <div class="account-card-header">
+          <div class="account-dot" style="background: var(--accent-top);"></div>
+          <div>
+            <div class="account-name">Top Care Clinics</div>
+            <div style="font-size:11px; color:var(--text-muted)">Campaigns: Topcare · التأمين الصحي الشامل</div>
+          </div>
+          <div style="margin-left:auto;"><span style="font-size:11px; font-weight:600; background:var(--green-light); color:var(--green); padding:3px 8px; border-radius:20px;">✅ Healthy</span></div>
+        </div>
+        <div class="account-card-body">
+          <div class="stat-row"><span class="stat-label">Lasir CPL</span><span class="stat-value">1.12 EGP 🚀</span></div>
+          <div class="stat-row"><span class="stat-label">Lasir reach</span><span class="stat-value">175,633</span></div>
+          <div class="stat-row"><span class="stat-label">Insurance (3 cities) CPL</span><span class="stat-value">3.19–3.77 EGP ✅</span></div>
+          <div class="stat-row"><span class="stat-label">Teeth campaigns</span><span class="stat-value">Still learning</span></div>
+          <div class="alert-item green"><div class="alert-dot"></div><div><strong>Lasir</strong> is your star — scale budget +30–50% now. Do NOT touch creative or audience.</div></div>
+          <div class="alert-item red"><div class="alert-dot"></div><div><strong>Teeth mssg2:</strong> 60.59 EGP / 2 results only. Pause and review creative + audience.</div></div>
+          <div class="alert-item amber"><div class="alert-dot"></div><div><strong>Teeth mssg1:</strong> 29 EGP with 4 results — give 7 more days, then review if no improvement.</div></div>
+          <div style="margin-top:10px; font-size:12px; color:var(--text-muted); border-top: 1px solid var(--border); padding-top:10px;">
+            <strong>App update needed:</strong> Lasir target CPL 5 EGP (kill-switch 15 EGP). Insurance kill-switch 8 EGP. Teeth pause flag already triggered.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APP FEED SUMMARY TABLE -->
+    <div class="section-label">Recommended app targets to enter now</div>
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:36px;">
+      <table class="kpi-table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Ad Set</th>
+            <th>CPL Target</th>
+            <th>Kill-Switch</th>
+            <th>Reach Target</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Dr. Ihab</td><td>Saudi Arabia</td><td>22 EGP</td><td>35 EGP</td><td>250K/mo</td><td style="color:var(--amber);">Refresh creative</td></tr>
+          <tr><td>Dr. Ihab</td><td>Libya/Algeria</td><td>25 EGP</td><td>35 EGP</td><td>90K/mo</td><td style="color:var(--red);">Pause now</td></tr>
+          <tr><td>Eye World</td><td>LAZIK Cairo</td><td>12 EGP</td><td>20 EGP</td><td>80K/mo</td><td style="color:var(--green);">Hold stable</td></tr>
+          <tr><td>Eye World</td><td>LAZIK Giza</td><td>20 EGP</td><td>35 EGP</td><td>15K/mo</td><td style="color:var(--text-secondary);">Learning — wait</td></tr>
+          <tr><td>Eye World</td><td>LAZIK Fayom</td><td>20 EGP</td><td>35 EGP</td><td>10K/mo</td><td style="color:var(--text-secondary);">Learning — wait</td></tr>
+          <tr><td>Eye World</td><td>LAZIK بنى سويف</td><td>20 EGP</td><td>35 EGP</td><td>10K/mo</td><td style="color:var(--red);">Watch closely</td></tr>
+          <tr><td>Eye World</td><td>LAZIK بنها</td><td>20 EGP</td><td>35 EGP</td><td>10K/mo</td><td style="color:var(--text-secondary);">Learning — wait</td></tr>
+          <tr><td>Top Care</td><td>Lasir</td><td>5 EGP</td><td>15 EGP</td><td>200K/mo</td><td style="color:var(--green);">Scale budget +40%</td></tr>
+          <tr><td>Top Care</td><td>Insurance Ismailia</td><td>4 EGP</td><td>8 EGP</td><td>40K/mo</td><td style="color:var(--green);">Hold stable</td></tr>
+          <tr><td>Top Care</td><td>Insurance Port Said</td><td>4 EGP</td><td>8 EGP</td><td>40K/mo</td><td style="color:var(--green);">Hold stable</td></tr>
+          <tr><td>Top Care</td><td>Insurance Suez</td><td>4 EGP</td><td>8 EGP</td><td>40K/mo</td><td style="color:var(--green);">Hold stable</td></tr>
+          <tr><td>Top Care</td><td>Teeth mssg1</td><td>20 EGP</td><td>40 EGP</td><td>5K/mo</td><td style="color:var(--text-secondary);">Learning — 7 days</td></tr>
+          <tr><td>Top Care</td><td>Teeth mssg2</td><td>20 EGP</td><td>40 EGP</td><td>5K/mo</td><td style="color:var(--red);">Pause now</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======================== CONTENT CREATOR ======================== -->
+  <div id="tab-content" class="role-section">
+    <div class="role-header">
+      <div class="role-icon" style="background:#FFF3E0;">✍️</div>
+      <div>
+        <div class="role-title">Content Creator — Asmaa</div>
+        <div class="role-subtitle">Responsible for all ad copy, captions, messaging & Arabic content across all 3 accounts</div>
+      </div>
+    </div>
+
+    <div class="day-grid">
+      <!-- SUNDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">
+            Sunday
+            <span class="day-badge" style="background:#E8F5EE; color:#1E5E3E;">Week Kickoff</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="day-focus">Plan & review week</div>
+            <div class="day-chevron">▼</div>
+          </div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–11:00</div>
+            <ul class="task-list">
+              <li><span class="account-tag" style="background:var(--accent-ihab-light);color:var(--accent-ihab);">Dr. Ihab</span> Review last week's ad copy performance. Check which messages got the highest engagement (reach + comments + DMs).</li>
+              <li><span class="account-tag" style="background:var(--accent-eye-light);color:var(--accent-eye);">Eye World</span> Review last week's ad copy performance for LAZIK Cairo + محافظات campaigns.</li>
+              <li><span class="account-tag" style="background:var(--accent-top-light);color:var(--accent-top);">Top Care</span> Review copy performance across Lasir, Insurance cities, and Teeth ads.</li>
+              <li>Pull any comments or DMs from the weekend and flag recurring patient questions — these become next content angles.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Midday — 11:00–13:00</div>
+            <ul class="task-list">
+              <li>Write the week's content plan: list each ad set that needs new or refreshed copy this week (check with Hadeer for which ad sets are flagged for creative refresh).</li>
+              <li><span class="account-tag" style="background:var(--accent-ihab-light);color:var(--accent-ihab);">Dr. Ihab</span> Write 2 new ad copy variations for the Libya/Algeria ad set — it has critical audience fatigue (freq. 3.26). Completely new hook, new offer angle.</li>
+              <li>Send content plan to supervisor for approval before proceeding.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 14:00–17:00</div>
+            <ul class="task-list">
+              <li>Write 2 copy variations for Saudi Arabia Dr. Ihab — audience warming up to fatigue (freq. 2.76). Focus on a different patient transformation angle.</li>
+              <li>Prepare a brief for Bakr (designer) for each new creative needed this week — include: hook text, CTA, tone, visual direction.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- MONDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">
+            Monday
+            <span class="day-badge" style="background:#EAF2F8; color:#1B4F72;">Production Day</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="day-focus">Write all approved copy</div>
+            <div class="day-chevron">▼</div>
+          </div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–12:00</div>
+            <ul class="task-list">
+              <li><span class="account-tag" style="background:var(--accent-top-light);color:var(--accent-top);">Top Care</span> Write 2 new copy variations for Teeth campaigns. Current Teeth mssg2 is paused — new copy must address a different pain point (e.g. confidence, not just price).</li>
+              <li><span class="account-tag" style="background:var(--accent-eye-light);color:var(--accent-eye);">Eye World</span> Write location-specific copy for the 4 محافظات ad sets (Giza, Fayom, Benha, بنى سويف) — each city must feel local, not generic Cairo copy.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 13:00–17:00</div>
+            <ul class="task-list">
+              <li>Write the caption/body text for any organic posts scheduled this week across all 3 accounts' pages.</li>
+              <li>Proofread all copy written today in Arabic — check for grammar, dialect appropriateness (Egyptian Arabic vs formal), and CTA clarity.</li>
+              <li>Submit all copy to supervisor + hand off to Bakr with design briefs attached.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- TUESDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">
+            Tuesday
+            <span class="day-badge" style="background:#F4EEF8; color:#6B2D7F;">Review & Iterate</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="day-focus">Check live copy performance</div>
+            <div class="day-chevron">▼</div>
+          </div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–11:00</div>
+            <ul class="task-list">
+              <li>Check performance of any new copy launched on Sunday/Monday — ask Hadeer for early CTR and message rate data.</li>
+              <li>Monitor comments on all active ads — reply to any patient questions in the comments as the brand voice (coordinate with clinic if medical question).</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Midday — 11:00–14:00</div>
+            <ul class="task-list">
+              <li>Write the mid-week content refresh: if any ad set is showing declining CTR (Hadeer will flag), write a new hook variation — same offer, completely different opening line.</li>
+              <li><span class="account-tag" style="background:var(--accent-ihab-light);color:var(--accent-ihab);">Dr. Ihab</span> Prepare next 2 weeks' worth of copy for Dr. Ihab's international campaigns in a doc so the team is never caught off guard.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEDNESDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">
+            Wednesday
+            <span class="day-badge" style="background:#EAF3DE; color:#3B6D11;">Competitor Watch</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="day-focus">Research & inspiration</div>
+            <div class="day-chevron">▼</div>
+          </div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–11:00</div>
+            <ul class="task-list">
+              <li>Spend 1 hour on Meta Ad Library — search competitor eye clinics and dental/aesthetic clinics in Egypt. Screenshot any ad that is getting high engagement.</li>
+              <li>Document: what hooks they use, what offers they lead with, what visuals repeat. This feeds next week's content angles.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Midday — 11:00–14:00</div>
+            <ul class="task-list">
+              <li>Write 1–2 new experimental copy angles inspired by the research — but NOT copying competitors. Use it as a direction, not a template.</li>
+              <li><span class="account-tag" style="background:var(--accent-top-light);color:var(--accent-top);">Top Care</span> Write or refresh Insurance campaign copy for the 3 canal cities — check if there are any seasonal or local events this week to reference.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 14:00–17:00</div>
+            <ul class="task-list">
+              <li>Prepare WhatsApp message templates for any campaigns using messaging as their result type — these must match the ad copy tone exactly so the patient's experience is consistent.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- THURSDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">
+            Thursday
+            <span class="day-badge" style="background:#FAEEDA; color:#854F0B;">Pre-Weekend Prep</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="day-focus">Buffer for Fri–Sat</div>
+            <div class="day-chevron">▼</div>
+          </div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–12:00</div>
+            <ul class="task-list">
+              <li>Write all content needed for Friday and Saturday (weekend in Egypt = high engagement). Prepare copy variations in advance so Hadeer can launch without waiting.</li>
+              <li>Prepare weekend-specific hooks — people browse more on weekends, so copy should be warmer and more personal, less clinical.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 13:00–17:00</div>
+            <ul class="task-list">
+              <li>Write the weekly content performance report for the supervisor — which messages worked, which didn't, and why (your copywriter's view).</li>
+              <li>Prepare a list of next week's copy needs to hand off before end of day — so Bakr can plan his design schedule and Hadeer can plan launches.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== MEDIA BUYER ======================== -->
+  <div id="tab-buyer" class="role-section">
+    <div class="role-header">
+      <div class="role-icon" style="background:#E8F5EE;">📈</div>
+      <div>
+        <div class="role-title">Media Buyer — Hadeer</div>
+        <div class="role-subtitle">Responsible for campaign setup, budget management, audience targeting, optimization & reporting across all 3 accounts</div>
+      </div>
+    </div>
+
+    <div class="day-grid">
+      <!-- SUNDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Sunday <span class="day-badge" style="background:#E8F5EE; color:#1E5E3E;">Weekly Audit</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">Full account check</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–11:00</div>
+            <ul class="task-list">
+              <li>Open all 3 ad accounts in Meta Ads Manager. For every active ad set, record: reach, frequency, results, CPL, spend, and CTR. Compare to last week.</li>
+              <li>Flag every ad set where: frequency exceeded 2.5 / CPL exceeded kill-switch / results declined more than 20% week-on-week.</li>
+              <li>Sync the dashboard app with the latest data (use the date range selector for the current month).</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Midday — 11:00–13:00</div>
+            <ul class="task-list">
+              <li><strong>Immediate actions based on current data:</strong></li>
+              <li><span class="account-tag" style="background:var(--accent-ihab-light);color:var(--accent-ihab);">Dr. Ihab</span> <strong>Pause</strong> Libya/Algeria ad set now (freq. 3.26, CPL 30.99 EGP). Do not reactivate until new creative is ready.</li>
+              <li><span class="account-tag" style="background:var(--accent-top-light);color:var(--accent-top);">Top Care</span> <strong>Pause</strong> Teeth mssg2 (60.59 EGP CPL, 2 results only).</li>
+              <li><span class="account-tag" style="background:var(--accent-top-light);color:var(--accent-top);">Top Care</span> <strong>Scale</strong> Lasir budget by 40% — it is performing at 1.12 EGP CPL. Do this in one step (not gradual), then monitor for 48hrs.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 14:00–17:00</div>
+            <ul class="task-list">
+              <li>Review audience overlap across all active ad sets using Audience Overlap tool — check if Eye World and Top Care campaigns are competing for the same audience pool.</li>
+              <li>Prepare the week's optimization plan: which ad sets will get new creatives (from Asmaa + Bakr), and on what day will you launch them.</li>
+              <li>Update CPL targets and kill-switch values in the dashboard app based on current performance.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- MONDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Monday <span class="day-badge" style="background:#EAF2F8; color:#1B4F72;">Launch Day</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">New creatives go live</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–10:00</div>
+            <ul class="task-list">
+              <li>Check all ad accounts for any delivery issues, disapprovals, or policy flags from the weekend. Resolve before proceeding.</li>
+              <li>Check that weekend spend didn't exceed any budget caps — if any ad overspent, adjust pacing settings.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Midday — 10:00–14:00</div>
+            <ul class="task-list">
+              <li>Launch new creative variations prepared by Asmaa and Bakr. Always duplicate the existing ad set (don't edit the live one) — set new ads inside the duplicate.</li>
+              <li>For any new ad set (محافظات campaigns still in learning), check learning phase status — do not make changes if "Learning" status is active.</li>
+              <li><span class="account-tag" style="background:var(--accent-ihab-light);color:var(--accent-ihab);">Dr. Ihab</span> If new Saudi Arabia creative is ready, add 2 new ads to the existing ad set as A/B test. Keep old creative running until new one shows lower CPL.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 14:00–17:00</div>
+            <ul class="task-list">
+              <li>Monitor newly launched ads for the first 4 hours — check for disapprovals or abnormal CPM spikes.</li>
+              <li>Set automated rules in Meta: pause any ad if CPL exceeds kill-switch target for 3 consecutive days.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- TUESDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Tuesday <span class="day-badge" style="background:#F4EEF8; color:#6B2D7F;">Optimization</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">Bid & audience tweaks</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–12:00</div>
+            <ul class="task-list">
+              <li>Pull performance data for all live ad sets. Compare Monday performance to Sunday baseline.</li>
+              <li>Check Frequency for all ad sets — any set crossing 2.0 frequency this week should be noted for creative refresh next week.</li>
+              <li>Check محافظات campaigns — after 5+ days, if any city still has under 20 results and CPL is above 40 EGP, prepare recommendation to pause.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 13:00–17:00</div>
+            <ul class="task-list">
+              <li>Review audience breakdown by age/gender for top-performing ad sets — if a specific segment is converting better, note it for audience refinement next week.</li>
+              <li>Prepare a brief performance snapshot to share with supervisor (not a full report — just: green/amber/red per ad set, and any budget decisions made today).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEDNESDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Wednesday <span class="day-badge" style="background:#EAF3DE; color:#3B6D11;">Mid-Week Check</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">Budget pacing review</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–11:00</div>
+            <ul class="task-list">
+              <li>Check budget pacing for all campaigns — are we on track to hit monthly targets, or are we overspending/underspending? Adjust daily budgets if needed.</li>
+              <li>Check if any ad set hit its kill-switch threshold and was paused automatically — review and decide whether to reactivate with new creative or leave paused.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Midday — 11:00–14:00</div>
+            <ul class="task-list">
+              <li>A/B test results check: if any creative tests launched Monday, compare performance. The winning creative should be identified by now (whichever has lower CPL with 20+ results each).</li>
+              <li>Pause the losing ad in A/B tests. Update the dashboard app with the winning creative's current CPL.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- THURSDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Thursday <span class="day-badge" style="background:#FAEEDA; color:#854F0B;">Reporting</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">Weekly numbers locked</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–12:00</div>
+            <ul class="task-list">
+              <li>Pull weekly performance export from Meta Ads Manager — all 3 accounts. Save with the date in the filename.</li>
+              <li>Upload the export to the dashboard app (CSV import feature) so the AI planner has the most current data for next week's plan.</li>
+              <li>Generate the PDF report from the dashboard app for the supervisor.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 13:00–17:00</div>
+            <ul class="task-list">
+              <li>Pre-set next week's budgets and any new campaign structures — coordinate with Asmaa on copy readiness and Bakr on creative readiness.</li>
+              <li>Flag to supervisor any campaigns that need a strategic decision (new budget, new targeting, new offer) for next week — don't wait for Sunday to raise flags.</li>
+              <li>Check if any special dates next week (holidays, events) require adjusted budgets or special creative — prep the request now.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DESIGNER ======================== -->
+  <div id="tab-designer" class="role-section">
+    <div class="role-header">
+      <div class="role-icon" style="background:#EAF2F8;">🎨</div>
+      <div>
+        <div class="role-title">Designer — Bakr</div>
+        <div class="role-subtitle">Responsible for all visual ad creatives, static images, videos, and design assets across all 3 accounts</div>
+      </div>
+    </div>
+
+    <div class="day-grid">
+      <!-- SUNDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Sunday <span class="day-badge" style="background:#E8F5EE; color:#1E5E3E;">Brief Intake</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">Receive & plan week</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–11:00</div>
+            <ul class="task-list">
+              <li>Receive all creative briefs from Asmaa — review each brief carefully: hook text, CTA, tone, visual direction, and which account it belongs to.</li>
+              <li>Confirm with Hadeer which ad sets are getting new creatives this week and in what priority order.</li>
+              <li>Check which formats are needed for each: single image / carousel / video / Reels cover / Story.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Midday — 11:00–14:00</div>
+            <ul class="task-list">
+              <li><span class="account-tag" style="background:var(--accent-ihab-light);color:var(--accent-ihab);">Dr. Ihab</span> Design 2 new static ads for the Libya/Algeria replacement — completely new visual, not a variation of the fatigued creative. Different color scheme, different image, same brand guidelines.</li>
+              <li>All Dr. Ihab creatives must feel premium and medical-authoritative. Avoid stock photo clinic images — use real or branded visuals only.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 14:00–17:00</div>
+            <ul class="task-list">
+              <li><span class="account-tag" style="background:var(--accent-ihab-light);color:var(--accent-ihab);">Dr. Ihab</span> Design 1–2 Saudi Arabia refresh creatives — fresh visual treatment while staying in brand. Focus on medical transformation (before/after style or testimonial visual).</li>
+              <li>Export all assets in correct Meta specs: Feed 1:1 (1080×1080), Story 9:16 (1080×1920), always under 20% text rule check.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- MONDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Monday <span class="day-badge" style="background:#EAF2F8; color:#1B4F72;">Main Production</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">Eye World + Top Care assets</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–12:00</div>
+            <ul class="task-list">
+              <li><span class="account-tag" style="background:var(--accent-eye-light);color:var(--accent-eye);">Eye World</span> Design city-specific creatives for محافظات campaigns. Each city must have its name clearly visible (e.g. "لأهل الجيزة" / "لأهل الفيوم"). Keep the LAZIK offer consistent but make each feel locally targeted.</li>
+              <li>LAZIK creatives: focus on vision freedom visual metaphor. Avoid generic eye stock photos.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 13:00–17:00</div>
+            <ul class="task-list">
+              <li><span class="account-tag" style="background:var(--accent-top-light);color:var(--accent-top);">Top Care</span> Design new Teeth campaign creative to replace the paused Teeth mssg2. Focus on confidence/smile outcome, not fear-based messaging. Warm, aspirational visual.</li>
+              <li>Prepare all assets in the shared folder (organized by account → campaign → format). Naming convention: AccountName_AdSetName_Date_V1.</li>
+              <li>Send completed assets to Hadeer and Asmaa for review before 5pm.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- TUESDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Tuesday <span class="day-badge" style="background:#F4EEF8; color:#6B2D7F;">Revisions</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">Feedback & fixes</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–12:00</div>
+            <ul class="task-list">
+              <li>Apply all feedback from Hadeer and Asmaa on Monday's assets. Maximum 1 round of revisions — if feedback is unclear, ask for clarification before starting.</li>
+              <li>Finalize and re-export revised assets in all required formats.</li>
+              <li>Deliver final assets to Hadeer for launch — confirm delivery via message, don't assume they saw the folder.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 13:00–17:00</div>
+            <ul class="task-list">
+              <li>Check performance screenshots/data from Hadeer — look at the best performing creative from last week. Study what visual elements made it work (color, composition, human face vs. text-heavy, etc.).</li>
+              <li>Start ideating next week's visual direction — create a quick mood board or visual references document to share with Asmaa for the next content brief cycle.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEDNESDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Wednesday <span class="day-badge" style="background:#EAF3DE; color:#3B6D11;">Video / Motion</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">Reels & story formats</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–13:00</div>
+            <ul class="task-list">
+              <li>Dedicate this day to any video/motion assets needed — Reels covers, animated ads, short video edits. Video consistently outperforms static on Meta.</li>
+              <li><span class="account-tag" style="background:var(--accent-top-light);color:var(--accent-top);">Top Care</span> If Lasir video assets are available, design a Reels-format version of the best static creative to test this week — video often reduces CPL further.</li>
+              <li><span class="account-tag" style="background:var(--accent-eye-light);color:var(--accent-eye);">Eye World</span> Create a short animated ad for LAZIK Cairo — 6–10 second motion graphic with key numbers (e.g. "تخلص من النظارة في 10 دقائق").</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- THURSDAY -->
+      <div class="day-card">
+        <div class="day-card-header" onclick="toggleDay(this)">
+          <div class="day-name">Thursday <span class="day-badge" style="background:#FAEEDA; color:#854F0B;">Archive & Prep</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><div class="day-focus">Organize & plan ahead</div><div class="day-chevron">▼</div></div>
+        </div>
+        <div class="day-body">
+          <div class="task-block">
+            <div class="task-time">Morning — 9:00–12:00</div>
+            <ul class="task-list">
+              <li>Archive this week's final assets in the master folder — ensure everything is named correctly and organized by account. Delete drafts and working files from shared folder.</li>
+              <li>Create a simple visual performance log: screenshot each live ad creative with its current CPL next to it. This builds your personal visual library of what works.</li>
+            </ul>
+          </div>
+          <div class="task-block">
+            <div class="task-time">Afternoon — 13:00–17:00</div>
+            <ul class="task-list">
+              <li>Plan next week's visual production schedule based on Hadeer's advance flag and Asmaa's content plan — estimate time needed per asset so you're never caught rushed.</li>
+              <li>Research: spend 30 minutes on Meta Ad Library and Behance looking at healthcare/medical ad design trends in MENA region. Save references for future work.</li>
+              <li>If any new campaign was briefed by management this week, start the initial concept sketches or mood board — even rough ideas — so Sunday's intake session is faster.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showTab(name) {
+    document.querySelectorAll('.role-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function toggleDay(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.day-chevron');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    header.classList.toggle('open', !isOpen);
+    chevron.classList.toggle('open', !isOpen);
+  }
+
+  const d = new Date();
+  document.getElementById('live-date').textContent = d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+</script>
+</body>
+</html>
