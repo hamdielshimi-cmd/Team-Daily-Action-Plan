@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Ads Performance — Strategic Action Plan</title>
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1e429f;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 0;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            height: 64px;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        /* Hero / Overview */
+        .hero {
+            margin-top: 64px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%);
+            color: white;
+            padding: 60px 24px 50px;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            opacity: 0.85;
+            margin-bottom: 40px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .kpi-card {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.2s;
+        }
+
+        .kpi-card:hover { transform: translateY(-4px); }
+
+        .kpi-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .kpi-context {
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+
+        .kpi-positive { color: #6ee7b7; }
+        .kpi-neutral { color: #fcd34d; }
+
+        /* Sections */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .section-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover { box-shadow: var(--shadow-lg); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-urgent { background: #fef2f2; color: var(--danger); }
+        .badge-scale { background: #ecfdf5; color: var(--success); }
+        .badge-review { background: #fffbeb; color: var(--warning); }
+        .badge-general { background: #eff6ff; color: var(--primary); }
+
+        /* Action Items */
+        .action-list {
+            list-style: none;
+        }
+
+        .action-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .action-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .action-item:first-child { padding-top: 0; }
+
+        .action-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .action-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .action-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .action-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            background: var(--bg);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: var(--bg);
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8fafc; }
+
+        .cell-brand {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cell-good { color: var(--success); font-weight: 600; }
+        .cell-warn { color: var(--warning); font-weight: 600; }
+        .cell-bad { color: var(--danger); font-weight: 600; }
+
+        /* Targets */
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .target-card {
+            background: var(--card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .target-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .target-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .target-title {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .target-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .metric-row:last-child { border-bottom: none; }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .metric-value {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-good { background: var(--success); }
+        .progress-warn { background: var(--warning); }
+        .progress-bad { background: var(--danger); }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 24px;
+            color: var(--text-light);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+            margin-top: 20px;
+        }
+
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 1.5rem; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .section { padding: 32px 16px; }
+            .target-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+    <div class="nav-inner">
+        <div class="nav-brand">
+            <span>📊</span> Ads Performance Report
+        </div>
+        <div class="nav-links">
+            <a href="#overview" class="nav-link active">Overview</a>
+            <a href="#action-plan" class="nav-link">Action Plan</a>
+            <a href="#steps" class="nav-link">Clear Steps</a>
+            <a href="#targets" class="nav-link">Targets</a>
+        </div>
+    </div>
+</nav>
+
+<!-- 1. OVERVIEW -->
+<section class="hero" id="overview">
+    <div class="hero-inner">
+        <h1>Facebook Ads Performance Analysis</h1>
+        <p class="hero-subtitle">Top Care & Eye World Hospital — Strategic Review & Action Plan</p>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Total Ad Spend</div>
+                <div class="kpi-value">28,050</div>
+                <div class="kpi-context">EGP across all campaigns</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Total Reach</div>
+                <div class="kpi-value">697.8K</div>
+                <div class="kpi-context">Unique users reached</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Total Results</div>
+                <div class="kpi-value">5,444</div>
+                <div class="kpi-context">Engagements + Conversations</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Avg. Cost Per Result</div>
+                <div class="kpi-value kpi-positive">5.15</div>
+                <div class="kpi-context">EGP — Below industry benchmark</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Top Care Efficiency</div>
+                <div class="kpi-value kpi-positive">1.19</div>
+                <div class="kpi-context">EGP per result — Exceptional</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Eye World CPL</div>
+                <div class="kpi-value kpi-positive">20.59</div>
+                <div class="kpi-context">EGP per lead — vs. 420-475 EGP benchmark</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div class="table-wrap" style="margin-top:32px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Reach</th>
+                    <th>Impressions</th>
+                    <th>Spend (EGP)</th>
+                    <th>Results</th>
+                    <th>Cost/Result</th>
+                    <th>CPM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="cell-brand">🦷 Top Care</td>
+                    <td>177,779</td>
+                    <td>247,841</td>
+                    <td>3,821</td>
+                    <td>3,201</td>
+                    <td class="cell-good">1.19 EGP</td>
+                    <td class="cell-good">15.42</td>
+                </tr>
+                <tr>
+                    <td class="cell-brand">👁️ Eye World Hospital</td>
+                    <td>419,152</td>
+                    <td>1,089,411</td>
+                    <td>19,877</td>
+                    <td>965</td>
+                    <td class="cell-warn">20.59 EGP</td>
+                    <td class="cell-good">18.34</td>
+                </tr>
+                <tr>
+                    <td class="cell-brand">🏥 Universal Health Ins.</td>
+                    <td>100,919</td>
+                    <td>194,720</td>
+                    <td>4,352</td>
+                    <td>1,278</td>
+                    <td class="cell-good">3.41 EGP</td>
+                    <td class="cell-warn">22.35</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 2. EXECUTION ACTION PLAN -->
+<section class="section" id="action-plan">
+    <div class="section-header">
+        <div class="section-icon" style="background:#ecfdf5;">⚡</div>
+        <div>
+            <h2 class="section-title">Execution Action Plan</h2>
+            <p class="section-desc">Immediate strategic moves to optimize performance and scale winning campaigns</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">🚀 Scale Winners</div>
+            <span class="badge badge-scale">High Priority</span>
+        </div>
+        <ul class="action-list">
+            <li class="action-item">
+                <span class="action-num">1</span>
+                <div class="action-content">
+                    <h4>Increase Budget for "دنيا العيون 2026 — lazik"</h4>
+                    <p>This campaign delivers messaging conversations at <strong>11.23 EGP</strong> — the best-performing lead gen ad set. Incrementally raise daily budget by <strong>15-20%</strong> every 3 days while monitoring cost stability.</p>
+                    <div class="action-meta">
+                        <span class="meta-tag">📈 Budget Scale</span>
+                        <span class="meta-tag">👁️ Eye World</span>
+                        <span class="meta-tag">⏱️ Start Immediately</span>
+                    </div>
+                </div>
+            </li>
+            <li class="action-item">
+                <span class="action-num">2</span>
+                <div class="action-content">
+                    <h4>Retarget "lasir" Engagers with Conversion Objective</h4>
+                    <p>Top Care's "lasir" generated <strong>3,195 engagements at 1.12 EGP</strong> — but engagement ≠ revenue. Build a retargeting audience from these engagers and run <strong>"Messaging conversations"</strong> or <strong>"Lead Generation"</strong> ads to convert them into actual patient bookings.</p>
+                    <div class="action-meta">
+                        <span class="meta-tag">🎯 Retargeting</span>
+                        <span class="meta-tag">🦷 Top Care</span>
+                        <span class="meta-tag">⏱️ Within 48 Hours</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">🛠️ Fix Underperformers</div>
+            <span class="badge badge-urgent">Critical</span>
+        </div>
+        <ul class="action-list">
+            <li class="action-item">
+                <span class="action-num" style="background:var(--danger);">1</span>
+                <div class="action-content">
+                    <h4>Pause "Teeth mssg2" Immediately</h4>
+                    <p>Cost per result is <strong>60.59 EGP</strong> with only 2 conversations — this is burning budget with near-zero return. Pause today and redirect budget to "lasir" retargeting.</p>
+                    <div class="action-meta">
+                        <span class="meta-tag">🛑 Pause Now</span>
+                        <span class="meta-tag">🦷 Top Care</span>
+                    </div>
+                </div>
+            </li>
+            <li class="action-item">
+                <span class="action-num" style="background:var(--danger);">2</span>
+                <div class="action-content">
+                    <h4>Consolidate Governorate Campaigns</h4>
+                    <p>"ليزك محافظات" campaigns (Giza, Fayoum, Beni Suef, Banha) have high costs (up to <strong>43.48 EGP</strong>) with tiny data. Merge into a single <strong>"Rest of Egypt"</strong> ad set to exit the learning phase faster and stabilize costs.</p>
+                    <div class="action-meta">
+                        <span class="meta-tag">🔀 Consolidate</span>
+                        <span class="meta-tag">👁️ Eye World</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">🔍 Review & Optimize</div>
+            <span class="badge badge-review">This Week</span>
+        </div>
+        <ul class="action-list">
+            <li class="action-item">
+                <span class="action-num" style="background:var(--warning);color:#1e293b;">1</span>
+                <div class="action-content">
+                    <h4>A/B Test Creatives for Expat Targeting</h4>
+                    <p>"dr .ihab 2025" campaigns targeting Saudi Arabia, Libya, and Algeria cost <strong>26-30 EGP</strong> per conversation. Test new creatives tailored to <strong>medical tourism</strong> (Arabic-language, regional pricing, travel package visuals) to improve conversion from these regions.</p>
+                    <div class="action-meta">
+                        <span class="meta-tag">🧪 A/B Test</span>
+                        <span class="meta-tag">👁️ Eye World</span>
+                        <span class="meta-tag">🌍 Regional</span>
+                    </div>
+                </div>
+            </li>
+            <li class="action-item">
+                <span class="action-num" style="background:var(--warning);color:#1e293b;">2</span>
+                <div class="action-content">
+                    <h4>Revamp Dental Messaging Ads</h4>
+                    <p>"Teeth mssg1" costs <strong>29.07 EGP</strong> — pause mssg2 first, then redesign mssg1 with: <strong>before/after photos</strong>, <strong>limited-time discount offers</strong>, or <strong>video patient testimonials</strong>. Test 3 new variations against current creative.</p>
+                    <div class="action-meta">
+                        <span class="meta-tag">🎨 Creative Refresh</span>
+                        <span class="meta-tag">🦷 Top Care</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- 3. CLEAR STEPS -->
+<section class="section" id="steps" style="background:#f1f5f9;">
+    <div class="section-header">
+        <div class="section-icon" style="background:#eff6ff;">📋</div>
+        <div>
+            <h2 class="section-title">Clear Steps — What Needs to Be Done</h2>
+            <p class="section-desc">Day-by-day tactical checklist for the marketing team</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Day 1 — Immediate Actions (Today)</div>
+            <span class="badge badge-urgent">Do Now</span>
+        </div>
+        <ul class="action-list">
+            <li class="action-item">
+                <span class="action-num">1</span>
+                <div class="action-content">
+                    <h4>Pause "Teeth mssg2" Campaign</h4>
+                    <p>Go to Ads Manager → Campaigns → Topcare → Teeth mssg2 → Toggle OFF. Reallocate its remaining budget to "lasir" retargeting campaign.</p>
+                </div>
+            </li>
+            <li class="action-item">
+                <span class="action-num">2</span>
+                <div class="action-content">
+                    <h4>Boost "دنيا العيون 2026 — lazik" Budget by 15%</h4>
+                    <p>Edit ad set → Budget & Schedule → Increase daily budget. Set a calendar reminder to check cost per result in 72 hours.</p>
+                </div>
+            </li>
+            <li class="action-item">
+                <span class="action-num">3</span>
+                <div class="action-content">
+                    <h4>Create Retargeting Audience from "lasir" Engagers</h4>
+                    <p>Audiences → Create Audience → Custom Audience → Engagement → People who engaged with any post or ad → Select "lasir" campaign → Name: "Top Care Lasir Engagers — 30D".</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Day 2-3 — Campaign Restructure</div>
+            <span class="badge badge-review">This Week</span>
+        </div>
+        <ul class="action-list">
+            <li class="action-item">
+                <span class="action-num">4</span>
+                <div class="action-content">
+                    <h4>Consolidate Governorate Campaigns into One Ad Set</h4>
+                    <p>Pause individual governorate ad sets (Giza, Fayoum, Beni Suef, Banha). Create new ad set: <strong>"ليزك — محافظات مصر"</strong> with combined locations and existing winning creative. Set initial budget = sum of paused ad sets.</p>
+                </div>
+            </li>
+            <li class="action-item">
+                <span class="action-num">5</span>
+                <div class="action-content">
+                    <h4>Launch "lasir" Retargeting Campaign</h4>
+                    <p>New campaign: Objective = <strong>Messages</strong>. Audience = "Top Care Lasir Engagers — 30D". Creative = booking-focused message ("Book your free consultation now"). Budget = 500 EGP/day initially.</p>
+                </div>
+            </li>
+            <li class="action-item">
+                <span class="action-num">6</span>
+                <div class="action-content">
+                    <h4>Duplicate "Teeth mssg1" with 3 New Creative Variations</h4>
+                    <p>Variation A: Before/after carousel. Variation B: Limited-time 20% discount + countdown. Variation C: 30-second patient testimonial video. Keep same targeting, run for 5 days, then evaluate.</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Day 4-7 — Testing & Monitoring</div>
+            <span class="badge badge-general">Ongoing</span>
+        </div>
+        <ul class="action-list">
+            <li class="action-item">
+                <span class="action-num">7</span>
+                <div class="action-content">
+                    <h4>Launch Expat A/B Test for "dr .ihab 2025"</h4>
+                    <p>Duplicate the campaign twice. Ad Set A = current creative. Ad Set B = new creative with medical tourism angle (Arabic copy, package pricing, hospital accreditation badges). Run for 7 days with equal budget split.</p>
+                </div>
+            </li>
+            <li class="action-item">
+                <span class="action-num">8</span>
+                <div class="action-content">
+                    <h4>Set Up CRM Tracking for Conversation Quality</h4>
+                    <p>Work with sales team to tag every messaging lead source = Facebook Ads. Track: (1) Conversation → Appointment booked, (2) Appointment → Showed up, (3) Showed up → Paid procedure. Calculate true ROAS by campaign.</p>
+                </div>
+            </li>
+            <li class="action-item">
+                <span class="action-num">9</span>
+                <div class="action-content">
+                    <h4>Monitor Frequency on "dr .ihab 2025" Campaigns</h4>
+                    <p>These are approaching <strong>frequency 3.0</strong>. If frequency hits 3.5 OR cost per result rises by >20%, immediately refresh creative or pause for 48 hours.</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- 4. TARGETS TO MONITOR & REACH -->
+<section class="section" id="targets">
+    <div class="section-header">
+        <div class="section-icon" style="background:#fef2f2;">🎯</div>
+        <div>
+            <h2 class="section-title">Targets to Monitor & Reach</h2>
+            <p class="section-desc">KPI thresholds, benchmarks, and success metrics for the next 30 days</p>
+        </div>
+    </div>
+
+    <div class="target-grid">
+        <div class="target-card">
+            <div class="target-header">
+                <div class="target-icon" style="background:#ecfdf5;">👁️</div>
+                <div>
+                    <div class="target-title">Eye World Hospital</div>
+                    <div class="target-subtitle">Ophthalmology / Lasik Leads</div>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Cost Per Conversation (Current)</div>
+                    <div class="progress-bar"><div class="progress-fill progress-good" style="width:85%"></div></div>
+                </div>
+                <div class="metric-value cell-good">20.59 EGP</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Target Cost Per Conversation</div>
+                    <div class="progress-bar"><div class="progress-fill progress-good" style="width:95%"></div></div>
+                </div>
+                <div class="metric-value" style="color:var(--success)">≤ 18.00 EGP</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">"lazik" Campaign — Maintain</div>
+                    <div class="progress-bar"><div class="progress-fill progress-good" style="width:100%"></div></div>
+                </div>
+                <div class="metric-value cell-good">≤ 12.00 EGP</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Governorate Consolidated — Target</div>
+                    <div class="progress-bar"><div class="progress-fill progress-warn" style="width:60%"></div></div>
+                </div>
+                <div class="metric-value cell-warn">≤ 25.00 EGP</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Expat Campaigns — Reduce</div>
+                    <div class="progress-bar"><div class="progress-fill progress-bad" style="width:40%"></div></div>
+                </div>
+                <div class="metric-value cell-bad">≤ 22.00 EGP</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Monthly Lead Volume Target</div>
+                </div>
+                <div class="metric-value">1,500+ conversations</div>
+            </div>
+        </div>
+
+        <div class="target-card">
+            <div class="target-header">
+                <div class="target-icon" style="background:#eff6ff;">🦷</div>
+                <div>
+                    <div class="target-title">Top Care</div>
+                    <div class="target-subtitle">Dental / General Healthcare</div>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Engagement Cost ("lasir") — Maintain</div>
+                    <div class="progress-bar"><div class="progress-fill progress-good" style="width:100%"></div></div>
+                </div>
+                <div class="metric-value cell-good">≤ 1.50 EGP</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Retargeting CPL — New Target</div>
+                    <div class="progress-bar"><div class="progress-fill progress-warn" style="width:50%"></div></div>
+                </div>
+                <div class="metric-value cell-warn">≤ 15.00 EGP</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">"Teeth mssg1" — After Refresh</div>
+                    <div class="progress-bar"><div class="progress-fill progress-warn" style="width:55%"></div></div>
+                </div>
+                <div class="metric-value cell-warn">≤ 20.00 EGP</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">"Teeth mssg2" — Kill Target</div>
+                    <div class="progress-bar"><div class="progress-fill progress-bad" style="width:10%"></div></div>
+                </div>
+                <div class="metric-value cell-bad">PAUSED</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Monthly Booking Target</div>
+                </div>
+                <div class="metric-value">200+ appointments</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">ROAS Target (Tracked via CRM)</div>
+                </div>
+                <div class="metric-value">≥ 4:1</div>
+            </div>
+        </div>
+
+        <div class="target-card">
+            <div class="target-header">
+                <div class="target-icon" style="background:#fffbeb;">📊</div>
+                <div>
+                    <div class="target-title">Account Health Metrics</div>
+                    <div class="target-subtitle">General Performance Guardrails</div>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Frequency Cap (All Campaigns)</div>
+                    <div class="progress-bar"><div class="progress-fill progress-warn" style="width:70%"></div></div>
+                </div>
+                <div class="metric-value cell-warn">≤ 3.0</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">CPM Ceiling — Egypt Healthcare</div>
+                    <div class="progress-bar"><div class="progress-fill progress-good" style="width:90%"></div></div>
+                </div>
+                <div class="metric-value cell-good">≤ 25 EGP</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Attribution Window</div>
+                </div>
+                <div class="metric-value">7-day click / 1-day view</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Learning Phase Exit</div>
+                </div>
+                <div class="metric-value">50+ conversions / ad set / week</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Creative Refresh Cycle</div>
+                </div>
+                <div class="metric-value">Every 14-21 days</div>
+            </div>
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Weekly Review Meeting</div>
+                </div>
+                <div class="metric-value">Every Monday 10 AM</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+        <div class="card-header">
+            <div class="card-title">🚦 Traffic Light Summary</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+            <div style="padding:16px;background:#ecfdf5;border-radius:12px;border-left:4px solid var(--success);">
+                <div style="font-weight:700;color:var(--success);margin-bottom:8px;">🟢 GREEN — Scale</div>
+                <p style="font-size:0.875rem;color:var(--text-light);">"lasir" engagement (1.12 EGP), "دنيا العيون lazik" (11.23 EGP), overall CPMs below benchmark</p>
+            </div>
+            <div style="padding:16px;background:#fffbeb;border-radius:12px;border-left:4px solid var(--warning);">
+                <div style="font-weight:700;color:var(--warning);margin-bottom:8px;">🟡 YELLOW — Optimize</div>
+                <p style="font-size:0.875rem;color:var(--text-light);">"Teeth mssg1" (29 EGP), expat targeting (26-30 EGP), governorate campaigns (43 EGP)</p>
+            </div>
+            <div style="padding:16px;background:#fef2f2;border-radius:12px;border-left:4px solid var(--danger);">
+                <div style="font-weight:700;color:var(--danger);margin-bottom:8px;">🔴 RED — Stop / Restructure</div>
+                <p style="font-size:0.875rem;color:var(--text-light);">"Teeth mssg2" (60.59 EGP) — PAUSE IMMEDIATELY</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+    <p><strong>Prepared by:</strong> Hamdi El Shimi <strong>Date:</strong> May 13, 2026 &nbsp;|&nbsp; <strong>Exchange Rate:</strong> 1 USD = 52.90 EGP</p>
+    <p style="margin-top:8px;opacity:0.7;">Next review scheduled: After EED</p>
+</div>
+
+<script>
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id], .hero[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrollY >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
